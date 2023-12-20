@@ -6,9 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+// import com.isamm.bibleoapp.Entity.Admin;
 import com.isamm.bibleoapp.Entity.Role;
+// import com.isamm.bibleoapp.dao.AdminDao;
 import com.isamm.bibleoapp.dao.RoleDao;
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 
 
@@ -28,6 +29,18 @@ public class BibleoAppApplication {
 			roleDao.save(new Role("ADMIN", "ADMINISTRATOR"));
 			roleDao.save(new Role("USER", "SIMPLE USER"));
 		}
+		// ########################################################
+		// ########################################################
+
+
+		// ########################################################
+		// ########################################################
+		// HETE WE CREATE ROLES OF USERS
+		// AdminDao adminDao=ctx.getBean(AdminDao.class);
+		// ArrayList<Admin> admins = (ArrayList<Admin>) adminDao.findAll();
+		// if(admins.size() == 0){
+		// 	System.out.println("We need to create an admin");
+		// }
 		// ########################################################
 		// ########################################################
 		
