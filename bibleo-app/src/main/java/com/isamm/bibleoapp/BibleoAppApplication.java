@@ -1,7 +1,7 @@
 package com.isamm.bibleoapp;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -43,10 +43,10 @@ public class BibleoAppApplication {
 		ArrayList<User> admins = (ArrayList<User>) userDao.findAllAdmins();
 		if(admins.size() == 0){
 			userDao.save(new User(
-				"Hatem Admin", "hatem@admin.com", "hatem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(0),role_admin , 50f, new Date(0)
+				"Hatem Admin", "hatem@admin.com", "hatem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()
 			));
 			userDao.save(new User(
-				"Ilhem Admin", "ilhem@admin.com", "ilhem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(0),role_admin , 50f, new Date(0)
+				"Ilhem Admin", "ilhem@admin.com", "ilhem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()
 			));
 		}
 
@@ -54,10 +54,10 @@ public class BibleoAppApplication {
 		ArrayList<User> users = (ArrayList<User>) userDao.findAllUsers();
 		if(users.size() == 0){
 			userDao.save(new User(
-				"Hatem User", "hatem@user.com", "hatem@user.com", "58217529", "Manouba, Slimen Kahya", new Date(0), role_user, new Date(0)
+				"Hatem User", "hatem@user.com", "hatem@user.com", "58217529", "Manouba, Slimen Kahya", new Date(), role_user, new Date()
 			));
 			userDao.save(new User(
-				"Ilhem User", "ilhem@user.com", "ilhem@user.com", "58217529", "Manouba, Slimen Kahya", new Date(0), role_user, new Date(0)
+				"Ilhem User", "ilhem@user.com", "ilhem@user.com", "58217529", "Manouba, Slimen Kahya", new Date(), role_user, new Date()
 			));
 				
 		}
