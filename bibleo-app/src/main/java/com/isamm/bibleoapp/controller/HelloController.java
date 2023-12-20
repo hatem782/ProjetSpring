@@ -1,10 +1,10 @@
-package com.isamm.bibleoapp;
+package com.isamm.bibleoapp.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloCrontroller {
+public class HelloController {
     
     @RequestMapping("/hello")
     public String sayHello() {
