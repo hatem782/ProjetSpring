@@ -1,5 +1,7 @@
 package com.isamm.bibleoapp.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.util.Date;
 
 @Entity
 @Table(name="USERS")
@@ -35,21 +36,15 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    // IF ADMIN
-    private Float salary;
-    private Date hireDate;
 
-
-    // IF USER
-    private Date AbonnementExpireDate;
 
 
     // ################### CONSTUCTORS ###################
     public User() {
     }
 
-    // TO MAKE USER
-    public User(String fullname, String email, String password, String phone, String address, Date birthday, Role role, Date AbonnementExpireDate) {
+  // TO MAKE USER
+      public User(String fullname, String email, String password, String phone, String address, Date birthday, Role role) {
         this.fullname = fullname;
         this.email = email;
         this.password = password;
@@ -57,21 +52,9 @@ public class User {
         this.address = address;
         this.birthday = birthday;
         this.role = role;
-        this.AbonnementExpireDate = AbonnementExpireDate;
+     
     }
 
-    // TO MAKE ADMIN
-    public User(String fullname, String email, String password, String phone, String address, Date birthday, Role role, Float salary, Date hireDate) {
-        this.fullname = fullname;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.address = address;
-        this.birthday = birthday;
-        this.role = role;
-        this.salary = salary;
-        this.hireDate = hireDate;
-    }
 
 
     // ################### GETTERS ###################
@@ -107,17 +90,6 @@ public class User {
         return role;
     }
 
-    public Float getSalary() {
-        return salary;
-    }
-
-    public Date getHireDate() {
-        return hireDate;
-    }
-
-    public Date getAbonnementExpireDate() {
-        return AbonnementExpireDate;
-    }
 
     // ################### SETTERS ###################
 
@@ -153,17 +125,6 @@ public class User {
         this.role = role;
     }
 
-    public void setSalary(Float salary) {
-        this.salary = salary;
-    }
-
-    public void setHireDate(Date hireDate) {
-        this.hireDate = hireDate;
-    }
-
-    public void setAbonnementExpireDate(Date AbonnementExpireDate) {
-        this.AbonnementExpireDate = AbonnementExpireDate;
-    }
 
 
     // ################### TO STRING ###################
@@ -178,10 +139,7 @@ public class User {
         ", id=" + this.id + 
         ", password=" + this.password + 
         ", phone=" + this.phone + 
-        ", role=" + role.toString() + 
-        ", salary=" + this.salary +
-        ", hireDate=" + this.hireDate.toString() +
-        ", AbonnementExpireDate=" + this.AbonnementExpireDate.toString() +
+        ", role=" + role.toString() +
         "]";
     }
 
