@@ -31,12 +31,12 @@ public class Auteur {
     private String nationalite;
 
 
-@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private AuteurStatut auteurStatut;
 
 
 
-     @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "livre_id")
     private Livre livre;
 

@@ -4,5 +4,6 @@ public enum Statut {
   Retourné,
   Emprunté,
   Refusé,
-  EnAttente
+  EnAttente,
+  Retard,
 }

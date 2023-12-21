@@ -51,10 +51,9 @@ public class BibleoAppApplication {
 		ArrayList<User> admins = (ArrayList<User>) userDao.findAllAdmins();
 		if(admins.size() == 0){
 			userDao.save(new Admin(
-				"Hatem Admin", "hatem@admin.com", "hatem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()
-				));
+				"Hatem Admin", "hatem@admin.com", "hatem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()));
 			userDao.save(new Admin(
-				"Ilhem Admin", "ilhem@admin.com", "ilhem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()			));
+				"Ilhem Admin", "ilhem@admin.com", "ilhem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()));
 		}
 
 		// HERE WE CREATE 2 USERS IF THERE IS NO USERS
