@@ -3,7 +3,7 @@ package com.isamm.bibleoapp.Entity;
 
 
 import java.util.Date;
-import java.util.List;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
