@@ -3,6 +3,7 @@ package com.isamm.bibleoapp.Entity;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -16,10 +17,10 @@ public class Adherant extends User{
 
 
 
- @OneToMany(mappedBy = "adherent")
+ @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL)
     private List<Emprunt> emprunts;
 
-    @OneToMany(mappedBy = "adherent")
+    @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     @OneToMany(mappedBy = "adherent")

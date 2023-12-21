@@ -60,7 +60,7 @@ public Livre(String titre
     List<Commentaire> commentaires,
     List<Review> reviews
     ,List<Emprunt> emprunts 
-    ,List<Auteur> auteurs) {
+     ,List<Auteur> auteurs) {
   this.titre=titre;
       this.anneePub=anneePub;
      this.isbn=isbn;
@@ -75,6 +75,33 @@ public Livre(String titre
       this.reviews=reviews;
        this.emprunts=emprunts;
         this.auteurs=auteurs;
+
+}
+
+
+// ################### CONSTUCTORS without reviews, commentaires,emprunts,auteur###################
+
+public Livre(String titre
+    , Date anneePub
+    , String isbn
+    , String description
+    , int quantite
+    , float amendeParJour
+    , String imageUri
+    , String genre,Langue langue) {
+  this.titre=titre;
+      this.anneePub=anneePub;
+     this.isbn=isbn;
+
+     this.description=description;
+      this.quantite=quantite;
+      this.amendeParJour=amendeParJour;
+    this.imageUri=imageUri;
+     this.genre=genre;
+     this.langue = langue;
+
+
+ 
 
 }
 
@@ -125,7 +152,7 @@ public List<Review> getReviews() {
 public List<Emprunt> getEmprunts() {
 	return emprunts;
 }
-public List<Auteur> getAuteurs() {
+public List<Auteur>  getAuteurs() {
 	return auteurs;
 }
 
@@ -169,7 +196,7 @@ public void setEmprunts(List<Emprunt> emprunts) {
 
 
 
-public void setAuteurs(List<Auteur> auteurs) {
+public void setAuteur(List<Auteur> auteurs ) {
 	this.auteurs = auteurs;
 }
 
@@ -196,6 +223,6 @@ public String toString() {
 			+ ", genre=" + genre + "]"+ ", commentaires=" + commentaires +
             ", reviews=" + reviews +
             ", emprunts=" + emprunts +
-            ", auteurs=" + auteurs ;
+            ", auteur=" + auteurs ;
 }
 }

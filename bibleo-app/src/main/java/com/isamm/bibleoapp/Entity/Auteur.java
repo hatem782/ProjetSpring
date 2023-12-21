@@ -3,6 +3,7 @@ package com.isamm.bibleoapp.Entity;
 
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,7 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Auteur")
+@Table(name="AUTEUR")
 public class Auteur {
     
 
@@ -60,6 +61,19 @@ public class Auteur {
       this.nationalite = nationalite;
       this.auteurStatut = auteurStatut;
       this.livre=livre;
+    }
+    
+     // ################### CONSTUCTORS without livre ###################
+
+     public Auteur(String nom, String prenom, Date dateNaiss, String nationalite, 
+    AuteurStatut auteurStatut) {
+   
+      this.nom = nom;
+      this.prenom = prenom;
+      this.dateNaiss = dateNaiss;
+      this.nationalite = nationalite;
+      this.auteurStatut = auteurStatut;
+
     }
     
 
@@ -135,7 +149,7 @@ public void setAutheurStatut(AuteurStatut auteurStatut) {
 }
 
 
-  public Livre getLivre() {
+  public Livre  getLivre() {
 	return livre;
 }
 
