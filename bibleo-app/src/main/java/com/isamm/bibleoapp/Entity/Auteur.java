@@ -1,17 +1,13 @@
 package com.isamm.bibleoapp.Entity;
 
 import java.util.Date;
-import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,8 +26,8 @@ public class Auteur {
   @Enumerated(EnumType.STRING)
   private AuteurStatut auteurStatut;
 
-  @OneToMany(mappedBy = "auteur", cascade = CascadeType.ALL)
-  private List<Livre> livres;
+  // @OneToMany(mappedBy = "auteur", cascade = CascadeType.ALL)
+  // private List<Livre> livres;
 
   // ################### CONSTUCTORS ###################
 
@@ -102,19 +98,19 @@ public class Auteur {
     this.auteurStatut = auteurStatut;
   }
 
-  public List<Livre> getLivres() {
-    return livres;
-  }
+  // public List<Livre> getLivres() {
+  // return livres;
+  // }
 
-  public void setLivres(List<Livre> livres) {
-    this.livres = livres;
-  }
+  // public void setLivres(List<Livre> livres) {
+  // this.livres = livres;
+  // }
 
   // ################### TO STRING ###################
   @Override
   public String toString() {
-    return "Auteur [nom=" + nom + ", prenom=" + prenom + ", nationalite=" + nationalite + ", livres="
-        + livres.toString() + "]";
+    return "Auteur [nom=" + nom + ", prenom=" + prenom + ", nationalite=" + nationalite + ", date naissance"
+        + dateNaiss.toString() + "]";
   }
 
 }

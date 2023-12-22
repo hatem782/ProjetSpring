@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isamm.bibleoapp.Entity.Auteur;
+import com.isamm.bibleoapp.Entity.Livre;
 import com.isamm.bibleoapp.dao.AuteurDao;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,9 +32,13 @@ public class AutherController {
     private AuteurDao auteurDao;
 
     @GetMapping("/all")
-    public List<Auteur> getAllAuteurs() {
+    public Page<Auteur> getAllAuteurs(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "9") int size) {
         // i will return all the authers
-        return auteurDao.findAll();
+        PageRequest pr = PageRequest.of(page, size);
+        Page<Auteur> auteurs = auteurDao.findAll(pr);
+        return auteurs;
     }
 
     @GetMapping("/one/{id}")
@@ -44,14 +52,14 @@ public class AutherController {
     @PostMapping("/create")
     public ResponseEntity<Auteur> createAuteur(@RequestBody Auteur auteur) {
         // here i will create a new auther from the body request then i will return it
-        System.out.println(auteur);
+        System.out.println(auteur.toString());
         Auteur createdAuteur = auteurDao.save(auteur);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAuteur);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Auteur> updateAuteur(@RequestBody Auteur auteur, @PathVariable Long id) {
-        System.out.println(auteur);
+        System.out.println(auteur.toString());
         // 1 : i will check if the auther exist or not
         if (!auteurDao.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();

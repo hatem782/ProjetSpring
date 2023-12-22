@@ -3,6 +3,8 @@ package com.isamm.bibleoapp.Entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -55,7 +57,6 @@ public class Livre {
         this.titre = titre;
         this.anneePub = anneePub;
         this.isbn = isbn;
-
         this.description = description;
         this.quantite = quantite;
         this.amendeParJour = amendeParJour;
@@ -69,10 +70,10 @@ public class Livre {
     }
 
     // ################### CONSTUCTORS without reviews,
-    // commentaires,emprunts,auteur###################
+    // commentaires,emprunts ###################
 
     public Livre(String titre, Date anneePub, String isbn, String description, int quantite, float amendeParJour,
-            String imageUri, String genre, Langue langue) {
+            String imageUri, String genre, Langue langue, Auteur auteur) {
         this.titre = titre;
         this.anneePub = anneePub;
         this.isbn = isbn;
@@ -83,6 +84,7 @@ public class Livre {
         this.imageUri = imageUri;
         this.genre = genre;
         this.langue = langue;
+        this.auteur = auteur;
 
     }
 
@@ -90,6 +92,10 @@ public class Livre {
 
     public Long getId() {
         return id;
+    }
+
+    public String getTitre() {
+        return titre;
     }
 
     public Langue getLangue() {
@@ -204,9 +210,9 @@ public class Livre {
     public String toString() {
         return "Livre [id=" + id + ", titre=" + titre + ", anneePub=" + anneePub + ", isbn=" + isbn + ", description="
                 + description + ", quantite=" + quantite + ", amendeParJour=" + amendeParJour + ", imageUri=" + imageUri
-                + ", genre=" + genre + "]" + ", commentaires=" + commentaires.toString() +
-                ", reviews=" + reviews.toString() +
-                ", emprunts=" + emprunts.toString() +
-                ", auteur=" + auteur.toString();
+                + ", genre=" + genre + "]" + ", commentaires=" + commentaires +
+                ", reviews=" + reviews +
+                ", emprunts=" + emprunts +
+                ", auteur=" + auteur;
     }
 }
