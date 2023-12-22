@@ -11,11 +11,13 @@ import com.isamm.bibleoapp.Entity.Adherant;
 import com.isamm.bibleoapp.Entity.Admin;
 import com.isamm.bibleoapp.Entity.Auteur;
 import com.isamm.bibleoapp.Entity.AuteurStatut;
+import com.isamm.bibleoapp.Entity.Commentaire;
 import com.isamm.bibleoapp.Entity.Langue;
 import com.isamm.bibleoapp.Entity.Livre;
 import com.isamm.bibleoapp.Entity.Role;
 import com.isamm.bibleoapp.Entity.User;
 import com.isamm.bibleoapp.dao.AuteurDao;
+import com.isamm.bibleoapp.dao.CommentaireDao;
 import com.isamm.bibleoapp.dao.LivreDao;
 import com.isamm.bibleoapp.dao.RoleDao;
 import com.isamm.bibleoapp.dao.UserDao;
@@ -51,10 +53,9 @@ public class BibleoAppApplication {
 		ArrayList<User> admins = (ArrayList<User>) userDao.findAllAdmins();
 		if(admins.size() == 0){
 			userDao.save(new Admin(
-				"Hatem Admin", "hatem@admin.com", "hatem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()
-				));
+				"Hatem Admin", "hatem@admin.com", "hatem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()));
 			userDao.save(new Admin(
-				"Ilhem Admin", "ilhem@admin.com", "ilhem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()			));
+				"Ilhem Admin", "ilhem@admin.com", "ilhem@admin.com", "58217529", "Manouba, Slimen Kahya", new Date(),role_admin , 50f, new Date()));
 		}
 
 		// HERE WE CREATE 2 USERS IF THERE IS NO USERS
@@ -103,6 +104,16 @@ public class BibleoAppApplication {
 		// ########################################################
 		// ########################################################
 		
+
+
+		//commentaire
+		 CommentaireDao commentaireDao =ctx.getBean(CommentaireDao.class);
+		 commentaireDao.save(new Commentaire(
+				"objet", "contenu1",true,"raisonSign"
+			));
+			commentaireDao.save(new Commentaire(
+				"objet2", "contenu2",false,"raisonSign"
+			));
 	}
 
 }

@@ -55,6 +55,15 @@ public class Commentaire {
       this.livre=livre;
   }
 
+  public Commentaire(String objet, String contenu, boolean estSignalé, String raisonSign) {
+      
+      this.objet = objet;
+      this.contenu = contenu;
+      this.estSignalé = estSignalé;
+      this.raisonSign = raisonSign;
+     
+  }
+
  // ################### GETTERS & SETTERS ###################
 
   public Livre getLivre() {
