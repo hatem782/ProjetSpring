@@ -2,6 +2,9 @@ package com.isamm.bibleoapp.Entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,13 +15,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="USERS")
+@Table(name = "USERS")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(nullable = false)
     private String fullname;
 
@@ -36,15 +40,13 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-
-
-
     // ################### CONSTUCTORS ###################
     public User() {
     }
 
-  // TO MAKE USER
-      public User(String fullname, String email, String password, String phone, String address, Date birthday, Role role) {
+    // TO MAKE USER
+    public User(String fullname, String email, String password, String phone, String address, Date birthday,
+            Role role) {
         this.fullname = fullname;
         this.email = email;
         this.password = password;
@@ -52,10 +54,8 @@ public class User {
         this.address = address;
         this.birthday = birthday;
         this.role = role;
-     
+
     }
-
-
 
     // ################### GETTERS ###################
     public Long getId() {
@@ -70,7 +70,7 @@ public class User {
         return email;
     }
 
-    public String getPassword() { 
+    public String getPassword() {
         return password;
     }
 
@@ -90,7 +90,6 @@ public class User {
         return role;
     }
 
-
     // ################### SETTERS ###################
 
     public void setId(Long id) {
@@ -105,7 +104,7 @@ public class User {
         this.email = email;
     }
 
-    public void setPassword(String password) { 
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -114,7 +113,7 @@ public class User {
     }
 
     public void setAddress(String address) {
-        this.address= address;
+        this.address = address;
     }
 
     public void setBirthday(Date birthday) {
@@ -125,22 +124,19 @@ public class User {
         this.role = role;
     }
 
-
-
     // ################### TO STRING ###################
 
-    
     @Override
     public String toString() {
-        return "User [address=" + this.address + 
-        ", birthday=" + this.birthday + 
-        ", email=" + this.email + 
-        ", fullname=" + this.fullname+ 
-        ", id=" + this.id + 
-        ", password=" + this.password + 
-        ", phone=" + this.phone + 
-        ", role=" + role.toString() +
-        "]";
+        return "User [address=" + this.address +
+                ", birthday=" + this.birthday +
+                ", email=" + this.email +
+                ", fullname=" + this.fullname +
+                ", id=" + this.id +
+                ", password=" + this.password +
+                ", phone=" + this.phone +
+                ", role=" + role.toString() +
+                "]";
     }
 
 }

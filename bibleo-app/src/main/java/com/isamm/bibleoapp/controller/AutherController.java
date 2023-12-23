@@ -1,5 +1,6 @@
 package com.isamm.bibleoapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isamm.bibleoapp.Entity.Auteur;
+import com.isamm.bibleoapp.Entity.Livre;
 import com.isamm.bibleoapp.dao.AuteurDao;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,7 +53,6 @@ public class AutherController {
     @PostMapping("/create")
     public ResponseEntity<Auteur> createAuteur(@RequestBody Auteur auteur) {
         // here i will create a new auther from the body request then i will return it
-        System.out.println(auteur.toString());
         Auteur createdAuteur = auteurDao.save(auteur);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAuteur);
     }

@@ -14,7 +14,6 @@ public class BibleoAppApplication {
 		ApplicationContext ctx = SpringApplication.run(BibleoAppApplication.class, args);
 		Filler filler = new Filler(ctx);
 		filler.FillDatabase();
-
 	}
 
 }
