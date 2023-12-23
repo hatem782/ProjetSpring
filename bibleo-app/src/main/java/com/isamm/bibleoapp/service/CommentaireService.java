@@ -23,37 +23,48 @@ public class CommentaireService {
 
     //get  comm by id
      public Optional<Commentaire> getCommentaireById(Long id) {
-        return commentaireDao.findById(id);
+        return commentaireDao.findByIdWithDetails(id);
     }
 
      //get al comm
     public List<Commentaire> getAllCommentaires() {
-        return commentaireDao.findAll();
+        return commentaireDao.findAllWithDetails();
     }
 
    
      //update comm
-     public Commentaire updateCommentaire(Commentaire commentaire,Long id) {
-        Commentaire cmmbd= commentaireDao.findById(id).get();
-        //objet
-         if (Objects.nonNull(commentaire.getObjet()) && !"".equalsIgnoreCase(commentaire.getObjet())) {
-            cmmbd.setContenu(commentaire.getObjet());
-        }
-        //contenu
-        if (Objects.nonNull(commentaire.getContenu()) && !"".equalsIgnoreCase(commentaire.getContenu())) {
-            cmmbd.setContenu(commentaire.getContenu());
-        }
-        //raison sign
-         if (Objects.nonNull(commentaire.getRaisonSign()) && !"".equalsIgnoreCase(commentaire.getRaisonSign())) {
-            cmmbd.setContenu(commentaire.getRaisonSign());
-        }
-        //est signalé boolean
-        if (Objects.nonNull(commentaire.isEstSignalé())) {
-            cmmbd.setEstSignalé(commentaire.isEstSignalé());
-        }
-        
-        return commentaireDao.save(commentaire);
+public Commentaire updateCommentaire(Commentaire commentaire, Long id) {
+    Commentaire cmmbd = commentaireDao.findById(id).orElseThrow(() -> new RuntimeException("Commentaire not found"));
+
+    // Update fields only if they are not null in the incoming data
+    if (Objects.nonNull(commentaire.getObjet())) {
+        cmmbd.setObjet(commentaire.getObjet());
     }
+
+    if (Objects.nonNull(commentaire.getContenu())) {
+        cmmbd.setContenu(commentaire.getContenu());
+    }
+
+    if (Objects.nonNull(commentaire.getRaisonSign())) {
+        cmmbd.setRaisonSign(commentaire.getRaisonSign());
+    }
+
+    if (Objects.nonNull(commentaire.isEstSignalé())) {
+        cmmbd.setEstSignalé(commentaire.isEstSignalé());
+    }
+
+    // Update livre and adherent only if they are not null in the incoming data
+    if (Objects.nonNull(commentaire.getLivre())) {
+        cmmbd.setLivre(commentaire.getLivre());
+    }
+
+    if (Objects.nonNull(commentaire.getAdherent())) {
+        cmmbd.setAdherent(commentaire.getAdherent());
+    }
+
+    // Save the changes to the existing entity
+    return commentaireDao.save(cmmbd);
+}
 
     //delete comm
     public void deleteCommentaire(Long id) {

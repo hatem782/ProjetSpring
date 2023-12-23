@@ -12,12 +12,14 @@ import com.isamm.bibleoapp.Entity.Admin;
 import com.isamm.bibleoapp.Entity.Auteur;
 import com.isamm.bibleoapp.Entity.AuteurStatut;
 import com.isamm.bibleoapp.Entity.Commentaire;
+import com.isamm.bibleoapp.Entity.Emprunt;
 import com.isamm.bibleoapp.Entity.Langue;
 import com.isamm.bibleoapp.Entity.Livre;
 import com.isamm.bibleoapp.Entity.Role;
 import com.isamm.bibleoapp.Entity.User;
 import com.isamm.bibleoapp.dao.AuteurDao;
 import com.isamm.bibleoapp.dao.CommentaireDao;
+import com.isamm.bibleoapp.dao.EmpruntDao;
 import com.isamm.bibleoapp.dao.LivreDao;
 import com.isamm.bibleoapp.dao.RoleDao;
 import com.isamm.bibleoapp.dao.UserDao;
@@ -82,7 +84,14 @@ public class BibleoAppApplication {
 			));
 		
 
-
+		  EmpruntDao empruntDao=ctx.getBean(EmpruntDao.class);
+		// HERE WE CREATE 2auteur
+			empruntDao.save(new Emprunt(
+				new Date(0), 12
+			));
+	empruntDao.save(new Emprunt(
+				new Date(0), 12
+			));
 
 
 			 // ########################################################
@@ -106,14 +115,14 @@ public class BibleoAppApplication {
 		
 
 
-		//commentaire
-		 CommentaireDao commentaireDao =ctx.getBean(CommentaireDao.class);
-		 commentaireDao.save(new Commentaire(
-				"objet", "contenu1",true,"raisonSign"
-			));
-			commentaireDao.save(new Commentaire(
-				"objet2", "contenu2",false,"raisonSign"
-			));
+		// //commentaire
+		//  CommentaireDao commentaireDao =ctx.getBean(CommentaireDao.class);
+		//  commentaireDao.save(new Commentaire(
+		// 		"objet", "contenu1",true,"raisonSign"
+		// 	));
+		// 	commentaireDao.save(new Commentaire(
+		// 		"objet2", "contenu2",false,"raisonSign"
+		// 	));
 	}
 
 }

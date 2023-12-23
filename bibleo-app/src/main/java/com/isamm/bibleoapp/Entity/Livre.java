@@ -3,6 +3,10 @@ package com.isamm.bibleoapp.Entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,6 +18,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="LIVRE")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Livre {
     
 
@@ -34,8 +39,8 @@ public class Livre {
 
 
 
-     @OneToMany(mappedBy = "livre")
-    private List<Commentaire> commentaires;
+      @OneToMany(mappedBy = "livre")
+     private List<Commentaire> commentaires;
 
     @OneToMany(mappedBy = "livre")
     private List<Review> reviews;
@@ -58,8 +63,8 @@ public Livre(String titre
     , String imageUri
     , String genre,Langue langue,
     List<Commentaire> commentaires,
-    List<Review> reviews
-    ,List<Emprunt> emprunts 
+    List<Review> reviews,
+    List<Emprunt> emprunts 
      ,List<Auteur> auteurs) {
   this.titre=titre;
       this.anneePub=anneePub;
@@ -220,7 +225,8 @@ public void setGenre (String genre) {
 public String toString() {
 	return "Livre [id=" + id + ", titre=" + titre + ", anneePub=" + anneePub + ", isbn=" + isbn + ", description="
 			+ description + ", quantite=" + quantite + ", amendeParJour=" + amendeParJour + ", imageUri=" + imageUri
-			+ ", genre=" + genre + "]"+ ", commentaires=" + commentaires +
+			+ ", genre=" + genre + "]"+
+             ", commentaires=" + commentaires +
             ", reviews=" + reviews +
             ", emprunts=" + emprunts +
             ", auteur=" + auteurs ;

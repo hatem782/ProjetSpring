@@ -1,6 +1,9 @@
 package com.isamm.bibleoapp.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="REVIEW")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Review {
     
     @Id
@@ -57,7 +61,10 @@ public class Review {
 public void setRate(Long rate) {
   Rate = rate;
 }
-  
+
+  public Long getId() {
+	return id;
+}
 
 
 

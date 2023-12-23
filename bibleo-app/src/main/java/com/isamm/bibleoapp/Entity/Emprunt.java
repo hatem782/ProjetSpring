@@ -2,6 +2,10 @@ package com.isamm.bibleoapp.Entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,6 +18,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="EMPRUNT")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Emprunt {
         @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,6 +50,11 @@ public class Emprunt {
 
      public Emprunt() {
    
+    }
+
+    public Emprunt( Date dateRetour, int nbCopie) {
+   this.dateRetour = dateRetour;
+      this.nbCopie = nbCopie;
     }
     
     public Emprunt(Date dateDebut, Date dateFin, Date dateRetour, int nbCopie, float amendeParJour, int amende,
@@ -84,6 +94,9 @@ public class Emprunt {
   
   public Date getDateFin() {
     return dateFin;
+  }
+  public Long getId() {
+    return id;
   }
   
   public void setDateFin(Date dateFin) {

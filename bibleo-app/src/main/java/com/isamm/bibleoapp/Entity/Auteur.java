@@ -4,6 +4,9 @@ package com.isamm.bibleoapp.Entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,6 +20,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="AUTEUR")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Auteur {
     
 
@@ -38,6 +42,7 @@ public class Auteur {
 
     @ManyToOne
     @JoinColumn(name = "livre_id")
+    @JsonBackReference
     private Livre livre;
 
 
@@ -85,7 +90,9 @@ public String getNom() {
 	return nom;
 }
 
-
+public Long getId() {
+	return id;
+}
 
 
 public void setNom(String nom) {

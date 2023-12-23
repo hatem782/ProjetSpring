@@ -2,7 +2,11 @@ package com.isamm.bibleoapp.Entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="COMMENTAIRE")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Commentaire {
     
 
@@ -26,12 +31,12 @@ public class Commentaire {
     private String raisonSign;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "livre_id") 
     private Livre livre;
 
 
-      @ManyToOne
+      @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "adherent_id")
     private Adherant adherent;
 
@@ -80,6 +85,9 @@ public void setLivre(Livre livre) {
   public String getObjet() {
     return objet;
 }
+ public Long getId() {
+    return id;
+}
 
 
 public void setObjet(String objet) {
@@ -95,7 +103,9 @@ public String getContenu() {
 public void setContenu(String contenu) {
     this.contenu = contenu;
 }
-
+public void setId(Long id) {
+    this.id = id;
+}
 
 public boolean isEstSignalé() {
     return estSignalé;
