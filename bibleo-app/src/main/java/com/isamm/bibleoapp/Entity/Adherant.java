@@ -29,8 +29,8 @@ public class Adherant extends User{
     @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL)
     private List<Review> reviews;
 
-     @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL)
-     private  List<Commentaire> commentaires;
+    @OneToMany(mappedBy = "adherent")
+    private List<Commentaire> commentaires;
 
 
    
@@ -99,11 +99,10 @@ public void setCommentaires(List<Commentaire> commentaires) {
   public String toString() {
       return "Admin{" +
               super.toString() +
-              ", AbonnementExpireDate=" + AbonnementExpireDate +
-               ", commentaires=" + commentaires.toString() +
-              ", reviews=" +
-               reviews.toString() +
-              ", emprunts=" + emprunts.toString() +
+              ", AbonnementExpireDate=" + AbonnementExpireDate 
+              + ", commentaires=" + commentaires +
+              ", reviews=" + reviews +
+              ", emprunts=" + emprunts +
               '}';
   }
 }
