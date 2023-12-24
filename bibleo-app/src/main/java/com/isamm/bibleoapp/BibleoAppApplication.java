@@ -86,12 +86,12 @@ public class BibleoAppApplication {
 
 		  EmpruntDao empruntDao=ctx.getBean(EmpruntDao.class);
 		// HERE WE CREATE 2auteur
-			empruntDao.save(new Emprunt(
-				new Date(0), 12
-			));
-	empruntDao.save(new Emprunt(
-				new Date(0), 12
-			));
+	// 		empruntDao.save(new Emprunt(
+	// 			new Date(0), 12
+	// 		));
+	// empruntDao.save(new Emprunt(
+	// 			new Date(0), 12
+	// 		));
 
 
 			 // ########################################################
@@ -102,10 +102,10 @@ public class BibleoAppApplication {
 			   LivreDao livreDao=ctx.getBean(LivreDao.class);
 		 
 		// HERE WE CREATE 2auteur
-			livreDao.save(new Livre(
-				"titre1", new Date(0), "isbn1","desc1",12 , 11,
-				 "imgurl","genre1",langue
-			));
+			// livreDao.save(new Livre(
+			// 	"titre1", new Date(0), "isbn1","desc1",12 , 11,
+			// 	 "imgurl","genre1",langue
+			// ));
 
 
 				

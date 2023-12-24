@@ -6,7 +6,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.isamm.bibleoapp.Entity.Commentaire;
 import com.isamm.bibleoapp.dao.CommentaireDao;
 
@@ -23,14 +27,24 @@ public class CommentaireService {
 
     //get  comm by id
      public Optional<Commentaire> getCommentaireById(Long id) {
-        return commentaireDao.findByIdWithDetails(id);
+        return commentaireDao.findById(id);
     }
 
      //get al comm
     public List<Commentaire> getAllCommentaires() {
-        return commentaireDao.findAllWithDetails();
+        return commentaireDao.findAll();
     }
 
+
+
+     //get All pagination
+ 
+    public Page<Commentaire> getAllCommentairesPage( @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "9") int size) {
+        PageRequest pr = PageRequest.of(page, size);
+        Page<Commentaire> commentaires = commentaireDao.findAll(pr);
+        return commentaires ;
+    }
    
      //update comm
 public Commentaire updateCommentaire(Commentaire commentaire, Long id) {
@@ -49,8 +63,8 @@ public Commentaire updateCommentaire(Commentaire commentaire, Long id) {
         cmmbd.setRaisonSign(commentaire.getRaisonSign());
     }
 
-    if (Objects.nonNull(commentaire.isEstSignalé())) {
-        cmmbd.setEstSignalé(commentaire.isEstSignalé());
+    if (Objects.nonNull(commentaire.isEstSignale())) {
+        cmmbd.setEstSignale(commentaire.isEstSignale());
     }
 
     // Update livre and adherent only if they are not null in the incoming data

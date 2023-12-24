@@ -5,7 +5,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.isamm.bibleoapp.Entity.Review;
 import com.isamm.bibleoapp.dao.ReviewDao;
@@ -24,14 +28,21 @@ public class ReviewService {
 
     //get by id
      public Optional<Review> getRevieweById(Long id) {
-        return reviewDao.findByIdWithDetails(id);
+        return reviewDao.findById(id);
     }
 
      //get all
     public List<Review> getAllReviews() {
-        return reviewDao.findAllWithDetails();
+        return reviewDao.findAll();
     }
-
+    //get All pagination
+ 
+    public Page<Review> getAllReviewsPage( @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "9") int size) {
+        PageRequest pr = PageRequest.of(page, size);
+        Page<Review> reviews = reviewDao.findAll(pr);
+        return reviews ;
+    }
    
      //update 
 public Review updateReview(Review review, Long id) {

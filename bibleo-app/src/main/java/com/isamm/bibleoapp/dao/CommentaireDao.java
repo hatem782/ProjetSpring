@@ -16,6 +16,17 @@ public interface CommentaireDao extends JpaRepository<Commentaire,Long>{
     @Query("SELECT c FROM Commentaire c JOIN FETCH c.livre JOIN FETCH c.adherent WHERE c.id = :id")
     Optional<Commentaire> findByIdWithDetails(Long id);
 
+    default Optional<Commentaire> findAndLogByIdWithDetails(Long id) {
+    Optional<Commentaire> result = findByIdWithDetails(id);
+    if (result.isPresent()) {
+        // Log the comment details or any other relevant information
+        System.out.println("Comment found: " + result.get());
+    } else {
+        System.out.println("Comment not found for id: " + id);
+    }
+    return result;
+}
+
     //find all 
      @Query("SELECT c FROM Commentaire c JOIN FETCH c.livre JOIN FETCH c.adherent")
     List<Commentaire> findAllWithDetails();
