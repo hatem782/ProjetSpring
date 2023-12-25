@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.isamm.bibleoapp.Entity.Commentaire;
@@ -59,6 +60,17 @@ public class CommentaireController {
     public String deleteCommentaire(@PathVariable Long id) {
         commentaireService.deleteCommentaire(id);
         return"Deleted Successfully";
+    }
+
+
+    //commentaire est signe 
+     @PutMapping("/signal/{id}")
+    public ResponseEntity<String> signalCommentaire(@PathVariable Long id) {
+        ResponseEntity<String> response = commentaireService.signalCommentaire(id);
+        
+        // You can add additional logic here if needed
+        
+        return response;
     }
 
 }

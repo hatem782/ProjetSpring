@@ -39,12 +39,12 @@ public class Commentaire {
 
     }
 
-    public Commentaire(String objet, String contenu, boolean estSignalé, String raisonSign, Adherant adherent,
+    public Commentaire(String objet, String contenu, String raisonSign, Adherant adherent,
             Livre livre) {
 
         this.objet = objet;
         this.contenu = contenu;
-        this.estSignalé = estSignalé;
+        this.estSignalé = false;
         this.raisonSign = raisonSign;
         this.adherent = adherent;
         this.livre = livre;

@@ -6,8 +6,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -83,5 +86,21 @@ public Commentaire updateCommentaire(Commentaire commentaire, Long id) {
     //delete comm
     public void deleteCommentaire(Long id) {
         commentaireDao.deleteById(id);
+    }
+
+
+    //commentaire signe
+      public ResponseEntity<String> signalCommentaire(Long id) {
+        Optional<Commentaire> commentaireOp = commentaireDao.findById(id);
+
+        if (commentaireOp.isPresent()) {
+            Commentaire commentaire = commentaireOp.get();
+            commentaire.setEstSignale(true);
+            commentaireDao.save(commentaire);
+            return ResponseEntity.ok("Commentaire signaled successfully");
+        } else {
+            // Handle the case where the Commentaire with the given ID is not found
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Commentaire not found with ID: " + id);
+        }
     }
 }
