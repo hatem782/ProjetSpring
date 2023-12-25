@@ -68,10 +68,10 @@ public class UserController {
         Role role = roleDao.findById(2L).get();
         adherant.setRole(role);
 
-        // here i will set the emprunts , reviews and comments to empty list
-        adherant.setEmprunts(new ArrayList<Emprunt>());
-        adherant.setReviews(new ArrayList<Review>());
-        adherant.setCommentaires(new ArrayList<Commentaire>());
+        // // here i will set the emprunts , reviews and comments to empty list
+        // adherant.setEmprunts(new ArrayList<Emprunt>());
+        // adherant.setReviews(new ArrayList<Review>());
+        // adherant.setCommentaires(new ArrayList<Commentaire>());
 
         // here i will create a new adherant from the body request then i will return it
         Adherant createAdherant = userDao.save(adherant);

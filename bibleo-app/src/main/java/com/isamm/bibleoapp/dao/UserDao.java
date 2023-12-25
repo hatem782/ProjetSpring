@@ -31,4 +31,8 @@ public interface UserDao extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.role.name = 'USER'")
     Page<Adherant> findAllUsers(PageRequest pr);
 
+    // FIND Adherant By Id
+    @Query("SELECT u FROM User u WHERE u.role.name = 'USER' AND u.id = ?1")
+    Optional<Adherant> findAdherantById(Long id);
+
 }

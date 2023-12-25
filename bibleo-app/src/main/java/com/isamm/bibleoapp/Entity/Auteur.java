@@ -1,24 +1,13 @@
 package com.isamm.bibleoapp.Entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,10 +34,6 @@ public class Auteur {
   @Enumerated(EnumType.STRING)
   private AuteurStatut auteurStatut;
 
-  // @OneToMany(mappedBy = "auteur", cascade = CascadeType.ALL)
-  // @JsonBackReference
-  // private List<Livre> livres;
-
   // ################### CONSTUCTORS without livre ###################
 
   public Auteur(String nom, String prenom, Date dateNaiss, String nationalite,
@@ -59,7 +44,6 @@ public class Auteur {
     this.dateNaiss = dateNaiss;
     this.nationalite = nationalite;
     this.auteurStatut = auteurStatut;
-    // this.livres = new ArrayList<Livre>();
 
   }
 
