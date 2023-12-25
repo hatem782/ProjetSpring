@@ -35,4 +35,12 @@ public interface UserDao extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.role.name = 'USER' AND u.id = ?1")
     Optional<Adherant> findAdherantById(Long id);
 
+    // FIND ADMIN BY EMAIL
+    @Query("SELECT u FROM User u WHERE u.role.name = 'ADMIN' AND u.email = ?1")
+    Optional<Admin> findAdminByEmail(String email);
+
+    // FIND USER BY EMAIL
+    @Query("SELECT u FROM User u WHERE u.role.name = 'USER' AND u.email = ?1")
+    Optional<Adherant> findUserByEmail(String email);
+
 }

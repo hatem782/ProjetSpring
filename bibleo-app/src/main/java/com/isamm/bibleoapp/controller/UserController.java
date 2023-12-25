@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isamm.bibleoapp.Entity.Adherant;
+import com.isamm.bibleoapp.Entity.Admin;
 import com.isamm.bibleoapp.Entity.Commentaire;
 import com.isamm.bibleoapp.Entity.Emprunt;
 import com.isamm.bibleoapp.Entity.Review;
 import com.isamm.bibleoapp.Entity.Role;
 import com.isamm.bibleoapp.Entity.User;
+import com.isamm.bibleoapp.SubClasses.ClassLogin;
 import com.isamm.bibleoapp.dao.RoleDao;
 import com.isamm.bibleoapp.dao.UserDao;
 
@@ -41,6 +44,9 @@ public class UserController {
 
     @Autowired
     private RoleDao roleDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/all")
     public Page<Adherant> getAllAdherant(
@@ -67,15 +73,35 @@ public class UserController {
         // here i will get the Role of the adherant and i will set it to the adherant
         Role role = roleDao.findById(2L).get();
         adherant.setRole(role);
-
-        // // here i will set the emprunts , reviews and comments to empty list
-        // adherant.setEmprunts(new ArrayList<Emprunt>());
-        // adherant.setReviews(new ArrayList<Review>());
-        // adherant.setCommentaires(new ArrayList<Commentaire>());
+        adherant.setPassword(passwordEncoder.encode(adherant.getPassword()));
 
         // here i will create a new adherant from the body request then i will return it
         Adherant createAdherant = userDao.save(adherant);
         return ResponseEntity.status(HttpStatus.CREATED).body(createAdherant);
+    }
+
+    @PostMapping("/login-user")
+    public ResponseEntity<Adherant> LoginUser(@RequestBody ClassLogin login) {
+
+        // let's find the user by email
+        Optional<Adherant> user = userDao.findUserByEmail(login.getEmail());
+        if (!user.isPresent()) {
+            System.out.println("#################################################");
+            System.out.println("NOT FOUND USER WITH THIS EMAIL " + login.getEmail());
+            System.out.println("#################################################");
+            return ResponseEntity.notFound().build();
+        }
+
+        // let's check if the password is correct or not
+        if (!passwordEncoder.matches(login.getPassword(), user.get().getPassword())) {
+            System.out.println("#################################################");
+            System.out.println("NOT FOUND USER WITH THIS PASSWORD " + login.getPassword());
+            System.out.println("#################################################");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        // let's return the user
+        return ResponseEntity.status(HttpStatus.OK).body(user.get());
     }
 
     @PutMapping("/update/{id}")

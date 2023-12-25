@@ -227,10 +227,6 @@ public class EmpruntController {
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedEmprunt);
     }
 
-    // TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST ME HERE
-    // TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST ME HERE
-    // TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST ME HERE
-
     // 5ales 5teytou
     @PutMapping("/payed-amandes/{id}")
     public ResponseEntity<Emprunt> PayedAmandeOFEmprunt(@PathVariable Long id) {
@@ -261,10 +257,6 @@ public class EmpruntController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedEmprunt);
     }
-
-    // TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST ME HERE
-    // TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST ME HERE
-    // TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST ME HERE
 
     @GetMapping("/get-emprunts-by-adherant-id/{my_id}")
     public Page<Emprunt> getEmpruntsByAdherantId(@PathVariable Long my_id,

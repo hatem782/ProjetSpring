@@ -2,8 +2,7 @@ package com.isamm.bibleoapp.Entity;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,10 +12,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "USERS")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -41,8 +47,6 @@ public class User {
     private Role role;
 
     // ################### CONSTUCTORS ###################
-    public User() {
-    }
 
     // TO MAKE USER
     public User(String fullname, String email, String password, String phone, String address, Date birthday,
@@ -55,88 +59,6 @@ public class User {
         this.birthday = birthday;
         this.role = role;
 
-    }
-
-    // ################### GETTERS ###################
-    public Long getId() {
-        return id;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    // ################### SETTERS ###################
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    // ################### TO STRING ###################
-
-    @Override
-    public String toString() {
-        return "User [address=" + this.address +
-                ", birthday=" + this.birthday +
-                ", email=" + this.email +
-                ", fullname=" + this.fullname +
-                ", id=" + this.id +
-                ", password=" + this.password +
-                ", phone=" + this.phone +
-                ", role=" + role.toString() +
-                "]";
     }
 
 }
