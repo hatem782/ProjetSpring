@@ -2,8 +2,6 @@ package com.isamm.bibleoapp.Entity;
 
 import java.util.Date;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -58,7 +56,6 @@ public class User {
         this.address = address;
         this.birthday = birthday;
         this.role = role;
-
     }
 
 }

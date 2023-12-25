@@ -39,12 +39,12 @@ public class Commentaire {
 
     }
 
-    public Commentaire(String objet, String contenu, boolean estSignalé, String raisonSign, Adherant adherent,
+    public Commentaire(String objet, String contenu, String raisonSign, Adherant adherent,
             Livre livre) {
 
         this.objet = objet;
         this.contenu = contenu;
-        this.estSignalé = estSignalé;
+        this.estSignalé = false;
         this.raisonSign = raisonSign;
         this.adherent = adherent;
         this.livre = livre;
@@ -84,11 +84,11 @@ public class Commentaire {
         this.contenu = contenu;
     }
 
-    public boolean isEstSignalé() {
+    public boolean isEstSignale() {
         return estSignalé;
     }
 
-    public void setEstSignalé(boolean estSignalé) {
+    public void setEstSignale(boolean estSignalé) {
         this.estSignalé = estSignalé;
     }
 
