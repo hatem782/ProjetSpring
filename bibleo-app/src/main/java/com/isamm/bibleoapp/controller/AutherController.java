@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isamm.bibleoapp.Entity.Auteur;
-import com.isamm.bibleoapp.Entity.Livre;
 import com.isamm.bibleoapp.dao.AuteurDao;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/auther")
-@CrossOrigin("*")
 public class AutherController {
 
     @Autowired

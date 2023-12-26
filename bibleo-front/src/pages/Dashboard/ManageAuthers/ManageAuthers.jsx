@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,84 +12,93 @@ import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
 
 import ModifBtn from "../../../components/Buttons/ModifBtn";
-import ShowBtn from "../../../components/Buttons/ShowBtn";
 import DeleteBtn from "../../../components/Buttons/DeleteBtn";
 
-const rows = [
-  {
-    id: 1,
-    title: "title1",
-    location: "location1",
-    date: "date1",
-    time: "time1",
-    show: true,
-  },
-  {
-    id: 2,
-    title: "title2",
-    location: "location2",
-    date: "date2",
-    time: "time2",
-    show: true,
-  },
-  {
-    id: 3,
-    title: "title3",
-    location: "location3",
-    date: "date3",
-    time: "time3",
-    show: true,
-  },
-  {
-    id: 4,
-    title: "title4",
-    location: "location4",
-    date: "date4",
-    time: "time4",
-    show: true,
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { GetAllAuther } from "../../../redux/Auther.reducer";
+import { makeDate } from "../../../functions/Dates.functions";
+
+import ModalAdd from "./ModalAdd";
+import ModalUpdate from "./ModalUpdate";
+import ModalDelete from "./ModalDelete";
+import usePopup from "../../../hooks/usePupup";
 
 function ManageAuthers() {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.AutherReducers.authers);
+
+  const [popup_add, open_add, close_add] = usePopup();
+  const [popup_modif, open_modif, close_modif] = usePopup();
+  const [popup_delete, open_delete, close_delete] = usePopup();
+
+  useEffect(() => {
+    dispatch(GetAllAuther());
+  }, []);
+
   return (
     <Paper sx={{ p: 2 }}>
       <h2>
         Manage Authers{" "}
-        <Button variant="outlined" endIcon={<AddIcon />}>
+        <Button onClick={open_add} variant="outlined" endIcon={<AddIcon />}>
           Add Auther
         </Button>
       </h2>
       <Table size="medium">
         <TableHead>
           <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>location</TableCell>
-            <TableCell>date</TableCell>
-            <TableCell>time</TableCell>
-            <TableCell>show</TableCell>
+            <TableCell>ID</TableCell>
+            <TableCell>Full Name</TableCell>
+            <TableCell>Birth Date</TableCell>
+            <TableCell>Nationality</TableCell>
+            <TableCell>Status</TableCell>
             <TableCell align="center">action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.title}</TableCell>
-              <TableCell>{row.location}</TableCell>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.time}</TableCell>
-              <TableCell>{row.show ? "YES" : "NO"}</TableCell>
+              <TableCell>{row.id}</TableCell>
+              <TableCell>
+                {row.nom} {row.prenom}
+              </TableCell>
+              <TableCell>{makeDate(row.dateNaiss)}</TableCell>
+              <TableCell>{row.nationalite}</TableCell>
+              <TableCell>{row.auteurStatut}</TableCell>
 
               <TableCell>
                 <Stack justifyContent="center" direction="row">
-                  <ShowBtn onClick={() => {}} />
-                  <ModifBtn onClick={() => {}} />
-                  <DeleteBtn onClick={() => {}} />
+                  {/* <ShowBtn onClick={() => {}} /> */}
+                  <ModifBtn
+                    onClick={() => {
+                      open_modif(row);
+                    }}
+                  />
+                  <DeleteBtn
+                    onClick={() => {
+                      open_delete(row);
+                    }}
+                  />
                 </Stack>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
+      {popup_add && (
+        <ModalAdd popup={{ open: popup_add }} handleClose={close_add} />
+      )}
+
+      {popup_modif && (
+        <ModalUpdate popup={{ open: popup_modif }} handleClose={close_modif} />
+      )}
+
+      {popup_delete && (
+        <ModalDelete
+          popup={{ open: popup_delete }}
+          handleClose={close_delete}
+        />
+      )}
     </Paper>
   );
 }
