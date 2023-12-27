@@ -28,6 +28,7 @@ function ModalAdd({ popup, handleClose }) {
   const handleSubmit = (e) => {
     dispatch(CreateAuther(Form, handleClose));
   };
+
   return (
     <Dialog open={open} handleClose={handleClose} title={"Ajouter Auther"}>
       <DialogContent dividers data-test="modal">
