@@ -90,12 +90,13 @@ public Commentaire updateCommentaire(Commentaire commentaire, Long id) {
 
 
     //commentaire signe
-      public ResponseEntity<String> signalCommentaire(Long id) {
+      public ResponseEntity<String> signalCommentaire(Long id, String raisonSign) {
         Optional<Commentaire> commentaireOp = commentaireDao.findById(id);
 
         if (commentaireOp.isPresent()) {
             Commentaire commentaire = commentaireOp.get();
             commentaire.setEstSignale(true);
+            commentaire.setRaisonSign(raisonSign);
             commentaireDao.save(commentaire);
             return ResponseEntity.ok("Commentaire signaled successfully");
         } else {
