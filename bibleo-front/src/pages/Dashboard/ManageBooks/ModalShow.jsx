@@ -31,7 +31,9 @@ function ModalDelete({ popup, handleClose }) {
           >
             <img src={book.imageUri} alt="" style={{ width: "100%" }} />
           </Grid>
+
           <Grid item xs={12} sm={6}>
+            <h3>About Book</h3>
             <Item title="Book Title"> {book.titre} </Item>
             <Divider />
             <Item title="ID / ISBN ">

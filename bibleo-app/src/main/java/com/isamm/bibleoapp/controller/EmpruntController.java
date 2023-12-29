@@ -278,9 +278,9 @@ public class EmpruntController {
     }
 
     // Get Emprunt By Id - Admin
-    @GetMapping("/get-all-emprunts")
+    @GetMapping("/get-all-emprunts") //
     public Page<Emprunt> getAllEmprunts(@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "9") int size) {
+            @RequestParam(defaultValue = "10") int size) {
 
         PageRequest pr = PageRequest.of(page, size);
         Page<Emprunt> emprunts = EmpruntDao.findAll(pr);
@@ -288,13 +288,58 @@ public class EmpruntController {
     }
 
     // Get 5teya Emprunt
-    @GetMapping("/get-5teya-emprunts")
+    @GetMapping("/get-5teya-emprunts") //
     public Page<Emprunt> get5teyaEmprunts(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "9") int size) {
+            @RequestParam(defaultValue = "10") int size) {
 
         PageRequest pr = PageRequest.of(page, size);
         Page<Emprunt> emprunts = EmpruntDao.findAllWithAmende(pr);
+        return emprunts;
+    }
+
+    @GetMapping("/get-en-attente-emprunts") //
+    public Page<Emprunt> getEnAttenteEmprunts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        PageRequest pr = PageRequest.of(page, size);
+        Page<Emprunt> emprunts = EmpruntDao.findAllEnAttente(pr);
+        return emprunts;
+    }
+
+    @GetMapping("/get-refuse-emprunts") //
+    public Page<Emprunt> getRefuseEmprunts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        PageRequest pr = PageRequest.of(page, size);
+        Page<Emprunt> emprunts = EmpruntDao.findAllRefuse(pr);
+        return emprunts;
+    }
+
+    @GetMapping("/get-retourne-emprunts") //
+    public Page<Emprunt> getRetourneEmprunts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        PageRequest pr = PageRequest.of(page, size);
+        Page<Emprunt> emprunts = EmpruntDao.findAllRetourne(pr);
+        return emprunts;
+    }
+
+    @GetMapping("/get-emprunte-emprunts")
+    public Page<Emprunt> getEmprunteEmprunts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        PageRequest pr = PageRequest.of(page, size);
+        Page<Emprunt> emprunts = EmpruntDao.findAllEmprunte(pr);
+        return emprunts;
+    }
+
+    @GetMapping("/get-retards-emprunts")
+    public Page<Emprunt> getRerardEmprunts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        PageRequest pr = PageRequest.of(page, size);
+        Page<Emprunt> emprunts = EmpruntDao.findAllRetard(pr);
         return emprunts;
     }
 

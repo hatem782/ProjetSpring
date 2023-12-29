@@ -22,4 +22,24 @@ public interface EmpruntDao extends JpaRepository<Emprunt, Long> {
     @Query("SELECT e FROM Emprunt e WHERE e.amende > 0")
     Page<Emprunt> findAllWithAmende(PageRequest pr);
 
+    // FIND ALL EMPRUNTS WHERE STATUS IS EN ATTENTE
+    @Query("SELECT e FROM Emprunt e WHERE e.statut = 'EnAttente'")
+    Page<Emprunt> findAllEnAttente(PageRequest pr);
+
+    // FIND ALL EMPRUNTS WHERE STATUS IS REFUSE
+    @Query("SELECT e FROM Emprunt e WHERE e.statut = 'Refusé'")
+    Page<Emprunt> findAllRefuse(PageRequest pr);
+
+    // FIND ALL EMPRUNTS WHERE STATUS IS RETOURNE
+    @Query("SELECT e FROM Emprunt e WHERE e.statut = 'Retourné'")
+    Page<Emprunt> findAllRetourne(PageRequest pr);
+
+    // FIND ALL EMPRUNTS WHERE STATUS IS EMPRUNTE
+    @Query("SELECT e FROM Emprunt e WHERE e.statut = 'Emprunté'")
+    Page<Emprunt> findAllEmprunte(PageRequest pr);
+
+    // FIND ALL EMPRUNTS WHERE STATUS IS Retard
+    @Query("SELECT e FROM Emprunt e WHERE e.statut = 'Retard'")
+    Page<Emprunt> findAllRetard(PageRequest pr);
+
 }
