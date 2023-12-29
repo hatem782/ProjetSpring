@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,7 +12,9 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import { useDispatch, useSelector } from "react-redux";
+import { loginAdmin } from "../../redux/Admin.reducer";
+import { useNavigate } from "react-router-dom";
 function Copyright(props) {
   return (
     <Typography
@@ -34,13 +36,22 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const handleSubmit = (event) => {
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    dispatch(
+      loginAdmin(form, () => {
+        console.log("Login successful!");
+      })
+    );
   };
 
   return (
@@ -90,11 +101,12 @@ export default function Login() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={handleChange}
+                value={form.email}
               />
               <TextField
                 margin="normal"
@@ -103,8 +115,9 @@ export default function Login() {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
                 autoComplete="current-password"
+                onChange={handleChange}
+                value={form.password}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -114,6 +127,7 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
+                onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign In

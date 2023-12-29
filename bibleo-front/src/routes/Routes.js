@@ -18,6 +18,7 @@ import ManageEmprunts from "../pages/Dashboard/ManageEmprunts/ManageEmprunts";
 import ManageComments from "../pages/Dashboard/ManageComments/ManageComments";
 import OneBook from "../pages/Dashboard/OneBook/OneBook";
 import Logout from "../pages/Dashboard/Logout/Logout";
+import Login from "../pages/Login/Login";
 
 const AdminRoutes = {
   main: [
