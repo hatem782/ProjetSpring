@@ -22,15 +22,8 @@ import { makeDate } from "../../../functions/Dates.functions";
 import ModalAdd from "./ModalAdd";
 import ModalUpdate from "./ModalUpdate";
 import ModalDelete from "./ModalDelete";
+import ModalShow from "./ModalShow";
 import usePopup from "../../../hooks/usePupup";
-import ImageUp from "../../../components/Buttons/ImageUp";
-
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import CardBook from "../../../components/Buttons/Card";
 
 function ManageBooks() {
   const dispatch = useDispatch();
@@ -39,6 +32,7 @@ function ManageBooks() {
   const [popup_add, open_add, close_add] = usePopup();
   const [popup_modif, open_modif, close_modif] = usePopup();
   const [popup_delete, open_delete, close_delete] = usePopup();
+  const [popup_show, open_show, close_show] = usePopup();
 
   useEffect(() => {
     dispatch(GetAllBook());
@@ -80,7 +74,11 @@ function ManageBooks() {
 
                   <TableCell>
                     <Stack justifyContent="center" direction="row">
-                      <ShowBtn onClick={() => {}} />
+                      <ShowBtn
+                        onClick={() => {
+                          open_show(row);
+                        }}
+                      />
                       <ModifBtn
                         onClick={() => {
                           open_modif(row);
@@ -114,6 +112,10 @@ function ManageBooks() {
               popup={{ open: popup_delete }}
               handleClose={close_delete}
             />
+          )}
+
+          {popup_show && (
+            <ModalShow popup={{ open: popup_show }} handleClose={close_show} />
           )}
         </Paper>
       </Grid>

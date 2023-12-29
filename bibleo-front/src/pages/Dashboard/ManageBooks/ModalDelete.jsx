@@ -20,7 +20,7 @@ function ModalDelete({ popup, handleClose }) {
     <Dialog
       open={open !== null}
       handleClose={handleClose}
-      title={"Delete Auther"}
+      title={"Delete Book"}
     >
       <DialogContent dividers data-test="modal">
         <Grid container spacing={2}>
