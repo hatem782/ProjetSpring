@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllAuther } from "../../../redux/Auther.reducer";
+import { GetAllAllAuther } from "../../../redux/Auther.reducer";
 import { UpdateBook } from "../../../redux/Books.reducer";
 import ImageUp from "../../../components/Buttons/ImageUp";
 import { makeDate2 } from "../../../functions/Dates.functions";
@@ -41,10 +41,10 @@ const langue = [
 function ModalUpdate({ popup, handleClose }) {
   const { open } = popup;
   const dispatch = useDispatch();
-  const authers = useSelector((state) => state.AutherReducers.authers);
+  const authers = useSelector((state) => state.AutherReducers.all_authers);
 
   useEffect(() => {
-    dispatch(GetAllAuther());
+    dispatch(GetAllAllAuther());
   }, []);
 
   useEffect(() => {
@@ -79,7 +79,7 @@ function ModalUpdate({ popup, handleClose }) {
   };
 
   return (
-    <Dialog open={open} handleClose={handleClose} title={"Ajouter Auther"}>
+    <Dialog open={open} handleClose={handleClose} title={"Update Book"}>
       <DialogContent dividers data-test="modal">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>

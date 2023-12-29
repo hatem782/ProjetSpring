@@ -69,7 +69,7 @@ function ModalAdd({ popup, handleClose }) {
   };
 
   return (
-    <Dialog open={open} handleClose={handleClose} title={"Ajouter Auther"}>
+    <Dialog open={open} handleClose={handleClose} title={"Create Book"}>
       <DialogContent dividers data-test="modal">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>

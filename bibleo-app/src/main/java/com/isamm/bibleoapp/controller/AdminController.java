@@ -42,9 +42,6 @@ public class AdminController {
     private UserDao userDao;
 
     @Autowired
-    private RoleDao roleDao;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login-admin")

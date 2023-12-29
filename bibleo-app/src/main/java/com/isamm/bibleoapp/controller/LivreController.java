@@ -43,6 +43,14 @@ public class LivreController {
 
     }
 
+    @GetMapping("/all-all")
+    public List<Livre> getAllAllLivres() {
+        // i will return all the livres
+        List<Livre> livres = livreDao.findAll();
+        return livres;
+
+    }
+
     @GetMapping("/one/{id}")
     public ResponseEntity<Livre> getLivreById(@PathVariable Long id) {
         // here i will find livre by id and i will return it if exist or i will return

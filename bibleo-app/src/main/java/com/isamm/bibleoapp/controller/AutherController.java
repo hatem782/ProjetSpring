@@ -40,6 +40,13 @@ public class AutherController {
         return auteurs;
     }
 
+    @GetMapping("/all-all")
+    public List<Auteur> getAllAuteurs() {
+        // i will return all the authers
+        List<Auteur> auteurs = auteurDao.findAll();
+        return auteurs;
+    }
+
     @GetMapping("/one/{id}")
     public ResponseEntity<Auteur> getAuteurById(@PathVariable Long id) {
         // here i will find auther by id and i will return it if exist or i will return

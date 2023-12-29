@@ -58,6 +58,14 @@ public class UserController {
 
     }
 
+    @GetMapping("/all-all")
+    public List<Adherant> getAllAdherant() {
+        // i will return all the adherant
+        List<Adherant> adherant = userDao.findAllUsers();
+        return adherant;
+
+    }
+
     @GetMapping("/one/{id}")
     public ResponseEntity<User> getAdherantById(@PathVariable Long id) {
         // here i will find adherant by id and i will return it if exist or i will
