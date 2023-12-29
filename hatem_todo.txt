@@ -1,0 +1,15 @@
+[ ] add swagger
+[ ] show all emprunts 
+[ ] show emprunts with filters
+[ ] pagination
+[ ] logins 
+[ ] adherant page
+[ ] adherant see books
+[ ] adherant see emprunts
+[ ] add review
+[ ] add comment 
+[ ] JWT
+[ ] add secrets 
+[ ] add paginations
+[ ] add docker
+[ ] deplouy the application
