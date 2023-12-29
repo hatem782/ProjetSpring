@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/emprunt")
-@CrossOrigin("*")
 public class EmpruntController {
 
     @Autowired

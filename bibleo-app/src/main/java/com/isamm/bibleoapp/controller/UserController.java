@@ -36,7 +36,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/adherant")
-@CrossOrigin("*")
 public class UserController {
 
     @Autowired

@@ -12,7 +12,7 @@ const Input = styled("input")({
 });
 
 export default function ImageUp(props) {
-  const { label, onChange } = props;
+  const { name = "", onChange = () => {} } = props;
   const [Image, setImage] = useState({ url: "", progress: 0, done: false });
 
   const changeImg = (event) => {
@@ -23,7 +23,7 @@ export default function ImageUp(props) {
   useEffect(() => {
     console.log(Image);
     if (Image.done) {
-      let e = { target: { name: label, value: Image.url } };
+      let e = { target: { name: name, value: Image.url } };
       onChange(e);
     }
   }, [Image]);
@@ -72,7 +72,7 @@ const UploadImg = (file, Image, SetImage) => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("tags", `Articles`);
-  formData.append("upload_preset", "images");
+  formData.append("upload_preset", "upload");
   formData.append("api_key", REACT_APP_API_KEY);
   formData.append("timestamp", (Date.now() / 1000) | 0);
 

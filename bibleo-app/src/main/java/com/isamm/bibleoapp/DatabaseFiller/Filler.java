@@ -135,27 +135,27 @@ public class Filler {
                 // ########################################################
                 // ################### LIVRES CREATION ####################
                 Livre livre1 = new Livre(
-                                "titre1",
+                                "Modeling Structured Finance Cash Flows With Microsoft Excel",
                                 new Date(0),
-                                "isbn1",
-                                "desc1",
+                                "553578",
+                                "During my first analytics position after graduate school, I asked a vice president at our company what the best way was to learn how his group modelled transactions. ",
                                 12,
                                 11,
-                                "imgurl",
+                                "https://www.junkybooks.com/administrator/bookimages/63547955185676.26019912.jpg",
                                 "genre1",
                                 langue,
                                 auteur1);
                 livreDao.save(livre1);
 
                 Livre livre2 = new Livre(
-                                "titre2",
+                                "Mathematics Of Bioinformatics: Theory, Methods And Applications",
                                 new Date(0),
                                 "isbn2",
-                                "desc2",
+                                "Recent progress in the determination of genomic sequences has yielded many millions of gene sequences. But what do these sequences tell us, and what generalities and rules are governed by them?",
                                 12,
                                 11,
-                                "imgurl2",
-                                "genre2",
+                                "https://www.junkybooks.com/administrator/bookimages/640e4fb486d068.50794721.jpg",
+                                "Math",
                                 langue,
                                 auteur2);
                 livreDao.save(livre2);

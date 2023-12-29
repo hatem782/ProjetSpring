@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -31,7 +32,10 @@ public class Livre {
     private String titre;
     private Date anneePub;
     private String isbn;
+
+    @Lob
     private String description;
+
     private int quantite;
     private float amendeParJour;
     private String imageUri;
