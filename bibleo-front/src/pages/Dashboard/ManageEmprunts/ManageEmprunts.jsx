@@ -40,7 +40,7 @@ const MakeChipStatus = ({ row }) => {
     return <Chip label="En Attente" color="warning" />;
 
   // refused
-  if (row.statut === "Refusé") return <Chip label="Refusé" color="error" />;
+  if (row.statut === "Refusé") return <Chip label="Refused" color="error" />;
 
   // accepted
   if (row.statut === "Emprunté")
@@ -108,6 +108,7 @@ function ManageEmprunts() {
                 onClick={() => {
                   setTypeEmprunts(type);
                 }}
+                color={type.color}
               >
                 {type.text}
               </Button>

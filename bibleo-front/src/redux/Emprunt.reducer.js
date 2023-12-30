@@ -13,36 +13,43 @@ export const typesEmprunts = [
     type: "All",
     url: "/api/emprunt/get-all-emprunts",
     text: "All Emprunts",
+    color: "primary",
   },
   {
     type: "En Attente",
     url: "/api/emprunt/get-en-attente-emprunts",
     text: "En Attente Emprunts",
+    color: "warning",
   },
   {
     type: "Refused",
     url: "/api/emprunt/get-refuse-emprunts",
     text: "Refused Emprunts",
+    color: "error",
   },
   {
     type: "With Amandes",
     url: "/api/emprunt/get-5teya-emprunts",
     text: "With Amandes Emprunts",
+    color: "error",
   },
   {
     type: "Emprunts Ended without amandes",
     url: "/api/emprunt/get-retourne-emprunts",
     text: "Emprunts Ended without amandes",
+    color: "info",
   },
   {
     type: "Actuals Emprunts",
     url: "/api/emprunt/get-emprunte-emprunts",
     text: "Actuals Emprunts",
+    color: "success",
   },
   {
     type: "Emprunts Ended with amandes",
     url: "/api/emprunt/get-retards-emprunts",
     text: "Emprunts Ended with amandes",
+    color: "secondary",
   },
 ];
 

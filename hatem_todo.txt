@@ -2,10 +2,10 @@
 [x] show all emprunts 
 [x] show emprunts with filters
 [x] delete emprunt
-[ ] accept emprunt
-[ ] refuse emprunt
-[ ] finish emprunt
-[ ] 5ales amandes
+[x] accept emprunt
+[x] refuse emprunt
+[x] finish emprunt
+[x] 5ales amandes
 
 [ ] pagination
 [ ] logins 
