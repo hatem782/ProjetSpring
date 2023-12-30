@@ -203,7 +203,7 @@ public class EmpruntController {
             // 2 : we calculate the number of days
             int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
             // 3 : we calculate the amende
-            float amende = diffDays * ETWBU.getAmendeParJour();
+            float amende = diffDays * ETWBU.getLivre().getAmendeParJour();
             // 4 : we set the amende
             ETWBU.setAmende((int) amende);
             ETWBU.setStatut(Statut.Retard);

@@ -1,6 +1,12 @@
 [ ] add swagger
-[ ] show all emprunts 
-[ ] show emprunts with filters
+[x] show all emprunts 
+[x] show emprunts with filters
+[x] delete emprunt
+[ ] accept emprunt
+[ ] refuse emprunt
+[ ] finish emprunt
+[ ] 5ales amandes
+
 [ ] pagination
 [ ] logins 
 [ ] adherant page

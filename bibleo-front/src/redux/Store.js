@@ -8,12 +8,14 @@ import {
 import thunk from "redux-thunk";
 import { AutherReducers } from "./Auther.reducer";
 import { BookReducers } from "./Books.reducer";
+import { EmpruntsReducers } from "./Emprunt.reducer";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const allReducers = combineReducers({
   AutherReducers,
   BookReducers,
+  EmpruntsReducers,
 });
 
 const store = createStore(allReducers, composeEnhancer(applyMiddleware(thunk)));

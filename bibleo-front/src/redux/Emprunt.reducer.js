@@ -4,13 +4,54 @@ const keys = {
   SET_EMPRUNTS: "SET_SET_EMPRUNTS",
   SET_ALL_EMPRUNTS: "SET_ALL_EMPRUNTS",
   SET_PAYLOAD: "SET_PAYLOAD_EMPRUNTS",
+  SET_TYPE: "SET_TYPE_EMPRUNTS",
   SET_PAGINATION: "SET_PAGINATION_EMPRUNTS",
 };
+
+export const typesEmprunts = [
+  {
+    type: "All",
+    url: "/api/emprunt/get-all-emprunts",
+    text: "All Emprunts",
+  },
+  {
+    type: "En Attente",
+    url: "/api/emprunt/get-en-attente-emprunts",
+    text: "En Attente Emprunts",
+  },
+  {
+    type: "Refused",
+    url: "/api/emprunt/get-refuse-emprunts",
+    text: "Refused Emprunts",
+  },
+  {
+    type: "With Amandes",
+    url: "/api/emprunt/get-5teya-emprunts",
+    text: "With Amandes Emprunts",
+  },
+  {
+    type: "Emprunts Ended without amandes",
+    url: "/api/emprunt/get-retourne-emprunts",
+    text: "Emprunts Ended without amandes",
+  },
+  {
+    type: "Actuals Emprunts",
+    url: "/api/emprunt/get-emprunte-emprunts",
+    text: "Actuals Emprunts",
+  },
+  {
+    type: "Emprunts Ended with amandes",
+    url: "/api/emprunt/get-retards-emprunts",
+    text: "Emprunts Ended with amandes",
+  },
+];
+
 // ###################################### STATE ###################################### //
 export const InitialState = {
   emprunts: [],
   all_emprunts: [],
   pagination: {},
+  get_type: typesEmprunts[0],
   payload: false,
 };
 
@@ -23,6 +64,8 @@ export const EmpruntsReducers = (state = { ...InitialState }, action) => {
       return { ...state, all_emprunts: action.value, payload: false };
     case keys.SET_PAYLOAD:
       return { ...state, payload: action.value };
+    case keys.SET_TYPE:
+      return { ...state, get_type: action.value };
     case keys.SET_PAGINATION:
       return { ...state, pagination: action.value };
     default:
@@ -31,41 +74,13 @@ export const EmpruntsReducers = (state = { ...InitialState }, action) => {
 };
 // ###################################### Actions ###################################### //
 
-const typesEmprunts = [
-  {
-    type: "All",
-    url: "/api/emprunt/get-all-emprunts",
-  },
-  {
-    type: "En Attente",
-    url: "/api/emprunt/get-en-attente-emprunts",
-  },
-  {
-    type: "Refused",
-    url: "/api/emprunt/get-refuse-emprunts",
-  },
-  {
-    type: "With Amandes",
-    url: "/api/emprunt/get-5teya-emprunts",
-  },
-  {
-    type: "Emprunts Ended without amandes",
-    url: "/api/emprunt/get-retourner-emprunts",
-  },
-  {
-    type: "Actuals Emprunts",
-    url: "/api/emprunt/get-emprunte-emprunts",
-  },
-  {
-    type: "Emprunts Ended with amandes",
-    url: "/api/emprunt/get-retards-emprunts",
-  },
-];
-
-export const GetAllEmprunts = (type = typesEmprunts[0]) => {
-  return async (dispatch) => {
+export const GetAllEmprunts = () => {
+  return async (dispatch, getState) => {
     try {
-      const response = await axios.get(type.url);
+      const currentState = getState();
+      const response = await axios.get(
+        currentState.EmpruntsReducers.get_type.url
+      );
       console.log(response.data);
       dispatch({
         type: keys.SET_PAGINATION,
@@ -81,6 +96,16 @@ export const GetAllEmprunts = (type = typesEmprunts[0]) => {
         value: false,
       });
     }
+  };
+};
+
+export const SetGetTypes = (type) => {
+  return async (dispatch) => {
+    dispatch({
+      type: keys.SET_TYPE,
+      value: type,
+    });
+    dispatch(GetAllEmprunts(type));
   };
 };
 
@@ -102,28 +127,11 @@ export const GetAllAllEmprunts = () => {
   };
 };
 
-export const CreateEmprunts = (emprunts, callback) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post("/api/emprunts/create", emprunts);
-      console.log(response);
-      dispatch(GetAllEmprunts());
-      callback();
-    } catch (error) {
-      dispatch({
-        type: keys.SET_PAYLOAD,
-        value: false,
-      });
-    }
-  };
-};
-
-export const UpdateEmprunts = (emprunts, callback) => {
+export const AcceptEmprunts = (emprunts, callback) => {
   return async (dispatch) => {
     try {
       const response = await axios.put(
-        `/api/emprunts/update/${emprunts.id}`,
-        emprunts
+        `/api/emprunt/accept_demande_emprunt_book/${emprunts.id}`
       );
       console.log(response);
       dispatch(GetAllEmprunts());
@@ -136,13 +144,84 @@ export const UpdateEmprunts = (emprunts, callback) => {
     }
   };
 };
+
+export const RefuseEmprunt = (emprunts, callback) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `/api/emprunt/refuse_demande_emprunt_book/${emprunts.id}`
+      );
+      console.log(response);
+      dispatch(GetAllEmprunts());
+      callback();
+    } catch (error) {
+      dispatch({
+        type: keys.SET_PAYLOAD,
+        value: false,
+      });
+    }
+  };
+};
+
+export const FinishEmprunt = (emprunts, callback) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `/api/emprunt/finish_demande_emprunt_book/${emprunts.id}`
+      );
+      console.log(response);
+      dispatch(GetAllEmprunts());
+      callback();
+    } catch (error) {
+      dispatch({
+        type: keys.SET_PAYLOAD,
+        value: false,
+      });
+    }
+  };
+};
+
+export const PayerAmande = (emprunts, callback) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `/api/emprunt/payed-amandes/${emprunts.id}`
+      );
+      console.log(response);
+      dispatch(GetAllEmprunts());
+      callback();
+    } catch (error) {
+      dispatch({
+        type: keys.SET_PAYLOAD,
+        value: false,
+      });
+    }
+  };
+};
+
+// export const UpdateEmprunts = (emprunts, callback) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.put(
+//         `/api/emprunts/update/${emprunts.id}`,
+//         emprunts
+//       );
+//       console.log(response);
+//       dispatch(GetAllEmprunts());
+//       callback();
+//     } catch (error) {
+//       dispatch({
+//         type: keys.SET_PAYLOAD,
+//         value: false,
+//       });
+//     }
+//   };
+// };
 
 export const deleteEmprunts = (emprunts, callback) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(
-        `/api/emprunts/delete/${emprunts.id}`
-      );
+      const response = await axios.delete(`/api/emprunt/delete/${emprunts.id}`);
       console.log(response);
       dispatch(GetAllEmprunts());
       callback();
