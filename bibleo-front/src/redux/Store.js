@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import { AutherReducers } from "./Auther.reducer";
 import { BookReducers } from "./Books.reducer";
 import { EmpruntsReducers } from "./Emprunt.reducer";
+import { UserReducers } from "./User.reducer";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -16,6 +17,7 @@ const allReducers = combineReducers({
   AutherReducers,
   BookReducers,
   EmpruntsReducers,
+  UserReducers,
 });
 
 const store = createStore(allReducers, composeEnhancer(applyMiddleware(thunk)));

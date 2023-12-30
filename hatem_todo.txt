@@ -1,4 +1,3 @@
-[ ] add swagger
 [x] show all emprunts 
 [x] show emprunts with filters
 [x] delete emprunt
@@ -7,15 +6,20 @@
 [x] finish emprunt
 [x] 5ales amandes
 
-[ ] pagination
 [ ] logins 
+
+[ ] add swagger
+[ ] pagination
 [ ] adherant page
 [ ] adherant see books
 [ ] adherant see emprunts
 [ ] add review
-[ ] add comment 
+[ ] add comment
+[ ] add emprunt
+
 [ ] JWT
 [ ] add secrets 
 [ ] add paginations
 [ ] add docker
 [ ] deplouy the application
+[ ] google analytics
