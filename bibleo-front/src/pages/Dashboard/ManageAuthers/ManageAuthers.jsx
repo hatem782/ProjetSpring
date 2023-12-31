@@ -43,7 +43,7 @@ function ManageAuthers() {
           Add Auther
         </Button>
       </h2>
-      <Table size="medium">
+      <Table size="medium" data-test="table">
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
@@ -69,16 +69,16 @@ function ManageAuthers() {
                 <Stack justifyContent="center" direction="row">
                   {/* <ShowBtn onClick={() => {}} /> */}
                   <ModifBtn
-                    data-test="buttonUpdate"
                     onClick={() => {
                       open_modif(row);
                     }}
+                    data-test="buttonUpdate"
                   />
                   <DeleteBtn
-                    data-test="buttonDelete"
                     onClick={() => {
                       open_delete(row);
                     }}
+                    data-test="buttonDelete"
                   />
                 </Stack>
               </TableCell>

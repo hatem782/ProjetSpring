@@ -1,0 +1,14 @@
+{
+  "auteur": {
+    "nom": "Hatem12",
+    "prenom": "hello",
+    "dateNaiss": "1990-01-01",
+    "nationalite": "tunis"
+  },
+  "auteurUpdated": {
+    "nom": "Hatem12",
+    "prenom": "hello12",
+    "dateNaiss": "1993-01-01",
+    "nationalite": "tunis12"
+  }
+}
