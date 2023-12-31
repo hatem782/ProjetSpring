@@ -7,3 +7,5 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/home/app/target/spring_rest_docker.jar"]
+# ENTRYPOINT ["java","-jar","/home/app/target/BibleoAppApplication.jar"]
+# ENTRYPOINT ["java","-jar","/home/app/target/bibleo-app-0.0.1.jar"]
