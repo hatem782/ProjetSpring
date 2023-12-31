@@ -1,0 +1,26 @@
+[x] show all emprunts 
+[x] show emprunts with filters
+[x] delete emprunt
+[x] accept emprunt
+[x] refuse emprunt
+[x] finish emprunt
+[x] 5ales amandes
+
+[x] logins 
+[x] adherant see books
+[x] adherant see emprunts
+[x] add emprunt
+
+[ ] add comment
+[ ] add review
+
+[ ] add swagger
+[ ] pagination
+[ ] adherant page
+
+[ ] JWT
+[ ] add secrets 
+[ ] add paginations
+[ ] add docker
+[ ] deplouy the application
+[ ] google analytics

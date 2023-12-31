@@ -1,25 +1,29 @@
 import { axios } from "../utils/axios";
 
 const keys = {
-  SET_AUTHERS: "SET_SET_AUTHERS",
-  SET_ALL_AUTHERS: "SET_ALL_AUTHERS",
-  SET_PAYLOAD: "SET_PAYLOAD_AUTHERS",
-  SET_PAGINATION: "SET_PAGINATION_AUTHERS",
+  SET_BOOKS: "SET_SET_BOOKS",
+  SET_BOOK: "SET_SET_BOOK",
+  SET_ALL_BOOKS: "SET_ALL_BOOKS",
+  SET_PAYLOAD: "SET_PAYLOAD_BOOKS",
+  SET_PAGINATION: "SET_PAGINATION_BOOKS",
 };
 // ###################################### STATE ###################################### //
 export const InitialState = {
-  authers: [],
-  all_authers: [],
+  books: [],
+  book: null,
+  all_books: [],
   pagination: {},
   payload: false,
 };
 // ###################################### Reducer ###################################### //
-export const AutherReducers = (state = { ...InitialState }, action) => {
+export const BookReducers = (state = { ...InitialState }, action) => {
   switch (action.type) {
-    case keys.SET_AUTHERS:
-      return { ...state, authers: action.value, payload: false };
-    case keys.SET_ALL_AUTHERS:
-      return { ...state, all_authers: action.value, payload: false };
+    case keys.SET_BOOKS:
+      return { ...state, books: action.value, payload: false };
+    case keys.SET_ALL_BOOKS:
+      return { ...state, all_books: action.value, payload: false };
+    case keys.SET_BOOK:
+      return { ...state, book: action.value };
     case keys.SET_PAYLOAD:
       return { ...state, payload: action.value };
     case keys.SET_PAGINATION:
@@ -30,17 +34,17 @@ export const AutherReducers = (state = { ...InitialState }, action) => {
 };
 // ###################################### Actions ###################################### //
 
-export const GetAllAuther = () => {
+export const GetAllBook = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/auther/all");
+      const response = await axios.get("/api/book/all");
       console.log(response.data);
       dispatch({
         type: keys.SET_PAGINATION,
         value: response.data,
       });
       dispatch({
-        type: keys.SET_AUTHERS,
+        type: keys.SET_BOOKS,
         value: response.data.content,
       });
     } catch (error) {
@@ -52,13 +56,13 @@ export const GetAllAuther = () => {
   };
 };
 
-export const GetAllAllAuther = () => {
+export const GetAllAllBook = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/auther/all-all");
+      const response = await axios.get("/api/book/all-all");
       console.log(response.data);
       dispatch({
-        type: keys.SET_ALL_AUTHERS,
+        type: keys.SET_ALL_BOOKS,
         value: response.data,
       });
     } catch (error) {
@@ -70,12 +74,30 @@ export const GetAllAllAuther = () => {
   };
 };
 
-export const CreateAuther = (auther, callback) => {
+export const GetOneBook = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("/api/auther/create", auther);
+      const response = await axios.get(`/api/book/one/${id}`);
+      console.log(response.data);
+      dispatch({
+        type: keys.SET_BOOK,
+        value: response.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: keys.SET_PAYLOAD,
+        value: false,
+      });
+    }
+  };
+};
+
+export const CreateBook = (book, callback) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("/api/book/create", book);
       console.log(response);
-      dispatch(GetAllAuther());
+      dispatch(GetAllBook());
       callback();
     } catch (error) {
       dispatch({
@@ -86,15 +108,12 @@ export const CreateAuther = (auther, callback) => {
   };
 };
 
-export const UpdateAuther = (auther, callback) => {
+export const UpdateBook = (book, callback) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(
-        `/api/auther/update/${auther.id}`,
-        auther
-      );
+      const response = await axios.put(`/api/book/update/${book.id}`, book);
       console.log(response);
-      dispatch(GetAllAuther());
+      dispatch(GetAllBook());
       callback();
     } catch (error) {
       dispatch({
@@ -105,12 +124,12 @@ export const UpdateAuther = (auther, callback) => {
   };
 };
 
-export const deleteAuther = (auther, callback) => {
+export const deleteBook = (book, callback) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`/api/auther/delete/${auther.id}`);
+      const response = await axios.delete(`/api/book/delete/${book.id}`);
       console.log(response);
-      dispatch(GetAllAuther());
+      dispatch(GetAllBook());
       callback();
     } catch (error) {
       dispatch({

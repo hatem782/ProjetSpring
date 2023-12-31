@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/book")
-
 public class LivreController {
 
     @Autowired
@@ -40,6 +39,14 @@ public class LivreController {
         // i will return all the livres
         PageRequest pr = PageRequest.of(page, size);
         Page<Livre> livres = livreDao.findAll(pr);
+        return livres;
+
+    }
+
+    @GetMapping("/all-all")
+    public List<Livre> getAllAllLivres() {
+        // i will return all the livres
+        List<Livre> livres = livreDao.findAll();
         return livres;
 
     }

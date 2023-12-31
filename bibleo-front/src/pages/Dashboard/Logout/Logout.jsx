@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { LogoutAction } from "../../../redux/User.reducer";
 
 function Logout() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    localStorage.removeItem("token");
+    dispatch(LogoutAction());
     navigate("/login");
   }, []);
 

@@ -1,0 +1,11 @@
+# Exclude files and directories from Docker build context
+
+# Exclude development files
+*.log
+*.iml
+.idea/
+
+# Exclude build-related files
+target/
+build/
+node_modules/
