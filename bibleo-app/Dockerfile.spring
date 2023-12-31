@@ -1,14 +1,9 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:11-jre-slim
-
-# Set the working directory in the container
-WORKDIR /usr/src/app
-
-# Copy the JAR file into the container
-COPY ./src/main/java/com/isamm/bibleoapp/BibleoAppApplication.jar app.jar
-
-# Expose port 8080
+#
+# Build stage
+#
+FROM maven:3.8.3-openjdk-17 AS build
+COPY ./src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package
 EXPOSE 8080
-
-# Define the command to run your Spring Boot app
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","/home/app/target/spring_rest_docker.jar"]

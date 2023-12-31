@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.isamm</groupId>
 	<artifactId>bibleo-app</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>bibleo-app</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
