@@ -137,7 +137,7 @@ function ModalUpdate({ popup, handleClose }) {
           autoFocus
           variant="contained"
           type="submit"
-          data-test="buttonAddForm"
+          data-test="buttonUpdateForm"
         >
           Update
         </Button>

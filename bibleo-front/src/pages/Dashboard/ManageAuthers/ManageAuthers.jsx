@@ -69,11 +69,13 @@ function ManageAuthers() {
                 <Stack justifyContent="center" direction="row">
                   {/* <ShowBtn onClick={() => {}} /> */}
                   <ModifBtn
+                    data-test="buttonUpdate"
                     onClick={() => {
                       open_modif(row);
                     }}
                   />
                   <DeleteBtn
+                    data-test="buttonDelete"
                     onClick={() => {
                       open_delete(row);
                     }}

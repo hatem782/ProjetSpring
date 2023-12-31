@@ -40,7 +40,7 @@ function ModalDelete({ popup, handleClose }) {
           autoFocus
           variant="contained"
           type="submit"
-          data-test="buttonAddForm"
+          data-test="buttonDeleteForm"
         >
           Delete
         </Button>
