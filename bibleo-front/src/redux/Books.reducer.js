@@ -2,6 +2,7 @@ import { axios } from "../utils/axios";
 
 const keys = {
   SET_BOOKS: "SET_SET_BOOKS",
+  SET_BOOK: "SET_SET_BOOK",
   SET_ALL_BOOKS: "SET_ALL_BOOKS",
   SET_PAYLOAD: "SET_PAYLOAD_BOOKS",
   SET_PAGINATION: "SET_PAGINATION_BOOKS",
@@ -9,6 +10,7 @@ const keys = {
 // ###################################### STATE ###################################### //
 export const InitialState = {
   books: [],
+  book: null,
   all_books: [],
   pagination: {},
   payload: false,
@@ -20,6 +22,8 @@ export const BookReducers = (state = { ...InitialState }, action) => {
       return { ...state, books: action.value, payload: false };
     case keys.SET_ALL_BOOKS:
       return { ...state, all_books: action.value, payload: false };
+    case keys.SET_BOOK:
+      return { ...state, book: action.value };
     case keys.SET_PAYLOAD:
       return { ...state, payload: action.value };
     case keys.SET_PAGINATION:
@@ -59,6 +63,24 @@ export const GetAllAllBook = () => {
       console.log(response.data);
       dispatch({
         type: keys.SET_ALL_BOOKS,
+        value: response.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: keys.SET_PAYLOAD,
+        value: false,
+      });
+    }
+  };
+};
+
+export const GetOneBook = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/api/book/one/${id}`);
+      console.log(response.data);
+      dispatch({
+        type: keys.SET_BOOK,
         value: response.data,
       });
     } catch (error) {

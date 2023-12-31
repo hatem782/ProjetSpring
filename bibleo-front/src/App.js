@@ -7,6 +7,10 @@ import "@fontsource/roboto/700.css";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Login/Login";
 import { useSelector } from "react-redux";
+import BooksPage from "./pages/Library/BooksPage/BooksPage";
+import OneBookDetails from "./pages/Library/OneBookDetails/OneBookDetails";
+import Logout from "./pages/Dashboard/Logout/Logout";
+import AdherantEmprunts from "./pages/Library/AdherantEmprunts/AdherantEmprunts";
 
 function App() {
   const role = useSelector((state) => state.UserReducers.role);
@@ -32,8 +36,11 @@ const AdminRoutes = () => {
 const AdherantRoutes = () => {
   return (
     <Routes>
-      <Route path="/library/*" element={<h1>Welcome to library</h1>} />
-      <Route path="/*" element={<Navigate to="/library/main" />} />
+      <Route path="/library/my-emprunts" element={<AdherantEmprunts />} />
+      <Route path="/library/books" element={<BooksPage />} />
+      <Route path="/library/book/:id" element={<OneBookDetails />} />
+      <Route path="/logout" element={<Logout />} />
+      <Route path="/*" element={<Navigate to="/library/books" />} />
     </Routes>
   );
 };

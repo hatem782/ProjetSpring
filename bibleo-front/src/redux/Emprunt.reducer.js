@@ -206,24 +206,23 @@ export const PayerAmande = (emprunts, callback) => {
   };
 };
 
-// export const UpdateEmprunts = (emprunts, callback) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios.put(
-//         `/api/emprunts/update/${emprunts.id}`,
-//         emprunts
-//       );
-//       console.log(response);
-//       dispatch(GetAllEmprunts());
-//       callback();
-//     } catch (error) {
-//       dispatch({
-//         type: keys.SET_PAYLOAD,
-//         value: false,
-//       });
-//     }
-//   };
-// };
+export const MakeEmpruntRequest = (adherant, book, form, callback) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `/api/emprunt/create_demande_emprunt_book?id_user=${adherant.id}&id_book=${book.id}`,
+        form
+      );
+      console.log(response);
+      callback();
+    } catch (error) {
+      dispatch({
+        type: keys.SET_PAYLOAD,
+        value: false,
+      });
+    }
+  };
+};
 
 export const deleteEmprunts = (emprunts, callback) => {
   return async (dispatch) => {

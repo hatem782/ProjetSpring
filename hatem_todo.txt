@@ -6,16 +6,17 @@
 [x] finish emprunt
 [x] 5ales amandes
 
-[ ] logins 
+[x] logins 
+[x] adherant see books
+[x] adherant see emprunts
+[x] add emprunt
+
+[ ] add comment
+[ ] add review
 
 [ ] add swagger
 [ ] pagination
 [ ] adherant page
-[ ] adherant see books
-[ ] adherant see emprunts
-[ ] add review
-[ ] add comment
-[ ] add emprunt
 
 [ ] JWT
 [ ] add secrets 
