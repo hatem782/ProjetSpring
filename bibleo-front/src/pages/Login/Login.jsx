@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -101,7 +101,6 @@ export default function Login() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
@@ -114,7 +113,6 @@ export default function Login() {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
                 autoComplete="current-password"
               />
 
@@ -122,6 +120,7 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
+                onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign In

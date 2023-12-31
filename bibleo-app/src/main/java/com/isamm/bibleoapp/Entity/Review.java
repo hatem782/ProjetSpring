@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "REVIEW")
+
 public class Review {
 
   @Id

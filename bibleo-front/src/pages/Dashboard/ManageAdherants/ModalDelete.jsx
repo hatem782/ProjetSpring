@@ -7,26 +7,26 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 
 import { useDispatch } from "react-redux";
-import { deleteAuther } from "../../../redux/Auther.reducer";
+import { deleteAdherant } from "../../../redux/Adherant.reducer";
 
 function ModalDelete({ popup, handleClose }) {
   const { open } = popup;
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
-    dispatch(deleteAuther(open, handleClose));
+    dispatch(deleteAdherant(open, handleClose));
   };
   return (
     <Dialog
       open={open !== null}
       handleClose={handleClose}
-      title={"Delete Auther"}
+      title={"Delete Adhérant"}
     >
       <DialogContent dividers data-test="modal">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <h2 style={{ color: "#F22C3D" }}>
-              Are you sure to delete the auther : "{open.nom} {open.prenom}"
+              Are you sure to delete the adhérant : "{open.fullname} "
             </h2>
           </Grid>
         </Grid>
@@ -40,7 +40,7 @@ function ModalDelete({ popup, handleClose }) {
           autoFocus
           variant="contained"
           type="submit"
-          data-test="buttonDeleteForm"
+          data-test="buttonAddForm"
         >
           Delete
         </Button>

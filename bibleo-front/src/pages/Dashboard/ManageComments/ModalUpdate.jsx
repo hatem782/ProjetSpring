@@ -1,5 +1,5 @@
-import React from "react";
-import { Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Grid, TextField, MenuItem } from "@mui/material";
 
 import Dialog from "../../../components/Popup/Popup";
 import DialogContent from "@mui/material/DialogContent";
@@ -7,27 +7,45 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 
 import { useDispatch } from "react-redux";
-import { deleteAuther } from "../../../redux/Auther.reducer";
+import { UpdateCommentaire } from "../../../redux/Commentaire.reducer";
 
-function ModalDelete({ popup, handleClose }) {
+function ModalUpdate({ popup, handleClose }) {
   const { open } = popup;
   const dispatch = useDispatch();
 
+  const [Form, setForm] = useState({
+    raisonSign: "",
+  });
+
+  useEffect(() => {
+    setForm({ ...open });
+  }, [open]);
+
+  const handleChange = (e) => {
+    setForm({ ...Form, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = (e) => {
-    dispatch(deleteAuther(open, handleClose));
+    dispatch(UpdateCommentaire(Form, handleClose));
   };
   return (
     <Dialog
       open={open !== null}
       handleClose={handleClose}
-      title={"Delete Auther"}
+      title={"Modifier Raison de signaler"}
     >
       <DialogContent dividers data-test="modal">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
-            <h2 style={{ color: "#F22C3D" }}>
-              Are you sure to delete the auther : "{open.nom} {open.prenom}"
-            </h2>
+            <TextField
+              fullWidth
+              label="Raison de signaler"
+              required
+              name="raisonSign"
+              variant="outlined"
+              onChange={handleChange}
+              value={Form.raisonSign}
+            />
           </Grid>
         </Grid>
       </DialogContent>
@@ -40,13 +58,13 @@ function ModalDelete({ popup, handleClose }) {
           autoFocus
           variant="contained"
           type="submit"
-          data-test="buttonDeleteForm"
+          data-test="buttonAddForm"
         >
-          Delete
+          Update
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-export default ModalDelete;
+export default ModalUpdate;

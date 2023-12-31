@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "COMMENTAIRE")
+
 public class Commentaire {
 
     @Id
@@ -38,13 +39,13 @@ public class Commentaire {
 
     }
 
-    public Commentaire(String objet, String contenu, String raisonSign, Adherant adherent,
+    public Commentaire(String objet, String contenu, Adherant adherent,
             Livre livre) {
 
         this.objet = objet;
         this.contenu = contenu;
         this.estSignalé = false;
-        this.raisonSign = raisonSign;
+        this.raisonSign = "";
         this.adherent = adherent;
         this.livre = livre;
     }

@@ -15,7 +15,7 @@ import com.isamm.bibleoapp.dao.CommentaireDao;
 import com.isamm.bibleoapp.service.CommentaireService;
 
 @RestController
-@RequestMapping("/commentaires")
+@RequestMapping("/api/commentaire")
 public class CommentaireController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class CommentaireController {
 
 
     //save
-    @PostMapping
+    @PostMapping("/create")
     public Commentaire saveCommentaire(@RequestBody Commentaire commentaire) {
         return commentaireService.saveCommentaire(commentaire);
     }
@@ -41,13 +41,13 @@ public class CommentaireController {
     }
 
     //get by id 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public Optional<Commentaire> getCommentaireById(@PathVariable Long id) {
         return commentaireService.getCommentaireById(id);
     }
 
     //update
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Commentaire updateCommentaire(@PathVariable("id") Long id, @RequestBody Commentaire commentaire) {        
         return commentaireService.updateCommentaire(commentaire, id);
     }
@@ -56,7 +56,7 @@ public class CommentaireController {
 
 
     //delete
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteCommentaire(@PathVariable Long id) {
         commentaireService.deleteCommentaire(id);
         return"Deleted Successfully";
@@ -65,8 +65,8 @@ public class CommentaireController {
 
     //commentaire est signe 
      @PutMapping("/signal/{id}")
-    public ResponseEntity<String> signalCommentaire(@PathVariable Long id) {
-        ResponseEntity<String> response = commentaireService.signalCommentaire(id);
+    public ResponseEntity<String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
+        ResponseEntity<String> response = commentaireService.signalCommentaire(id,raisonSign);
         
         // You can add additional logic here if needed
         

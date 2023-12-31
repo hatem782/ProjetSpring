@@ -16,7 +16,7 @@ import com.isamm.bibleoapp.service.ReviewService;
 
 
 @RestController
-@RequestMapping("/reviews")
+@RequestMapping("/api/review")
 public class ReviewController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ReviewController {
 
 
     //save
-    @PostMapping
+    @PostMapping("/create")
     public Review saveReview(@RequestBody Review review) {
         return reviewService.saveReview(review);
     }
@@ -44,13 +44,13 @@ public class ReviewController {
     }
 
     //get by id 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public Optional<Review> getReviewById(@PathVariable Long id) {
         return reviewService.getRevieweById(id);
     }
 
     //update
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Review updateReview(@PathVariable("id") Long id, @RequestBody Review review) {        
         return reviewService.updateReview(review, id);
 
@@ -60,7 +60,7 @@ public class ReviewController {
 
 
     //delete
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteReview(@PathVariable Long id) {
         reviewService.deleteReview(id);
         return"Deleted Successfully";

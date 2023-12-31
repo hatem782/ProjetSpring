@@ -1,68 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Grid, TextField, MenuItem } from "@mui/material";
 
 import Dialog from "../../../components/Popup/Popup";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-
-import { makeDate2 } from "../../../functions/Dates.functions";
 import { useDispatch } from "react-redux";
-import { UpdateAuther } from "../../../redux/Auther.reducer";
+import { CreateAdherant } from "../../../redux/Adherant.reducer";
 
 const Status = ["Décès", "Vivant"];
 
-function ModalUpdate({ popup, handleClose }) {
+function ModalAdd({ popup, handleClose }) {
   const { open } = popup;
   const dispatch = useDispatch();
 
   const [Form, setForm] = useState({
-    nom: "",
-    prenom: "",
-    dateNaiss: new Date(),
-    nationalite: "",
-    auteurStatut: Status[0],
+    fullname: "",
+    email: "",
+    birthday: new Date(),
+    phone: "",
+    address: "",
+    abonnementExpireDate: new Date(),
+    password: "",
   });
-
-  useEffect(() => {
-    setForm({ ...open, dateNaiss: makeDate2(open.dateNaiss) });
-  }, [open]);
-
   const handleChange = (e) => {
     setForm({ ...Form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
-    dispatch(UpdateAuther(Form, handleClose));
+    dispatch(CreateAdherant(Form, handleClose));
   };
+
   return (
-    <Dialog
-      open={open !== null}
-      handleClose={handleClose}
-      title={"Modifier Auther"}
-    >
+    <Dialog open={open} handleClose={handleClose} title={"Ajouter Adhérant"}>
       <DialogContent dividers data-test="modal">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <TextField
               fullWidth
-              label="Auther First Name"
+              label="Adhérant Full Name"
               required
-              name="nom"
+              name="fullname"
               variant="outlined"
               onChange={handleChange}
-              value={Form.nom}
+              value={Form.fullname}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
               fullWidth
-              label="Auther Last Name"
+              label="Adhérant Email"
               required
-              name="prenom"
+              name="email"
               variant="outlined"
               onChange={handleChange}
-              value={Form.prenom}
+              value={Form.email}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -70,39 +62,57 @@ function ModalUpdate({ popup, handleClose }) {
               fullWidth
               type="date"
               label="Birth Date"
-              name="dateNaiss"
+              name="birthday"
               variant="outlined"
               required
               onChange={handleChange}
-              value={Form.dateNaiss}
+              value={Form.birthday}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
               fullWidth
-              label="Nationality"
-              name="nationalite"
+              label="Numéro de Téléphone"
+              name="phone"
               variant="outlined"
               required
               onChange={handleChange}
-              value={Form.nationalite}
+              value={Form.phone}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
               fullWidth
-              name="auteurStatut"
+              label="Address"
+              name="address"
               variant="outlined"
-              onChange={handleChange}
-              value={Form.auteurStatut}
-              label="Auther Status"
-              select
               required
-            >
-              {Status.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-            </TextField>
+              onChange={handleChange}
+              value={Form.address}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              fullWidth
+              type="date"
+              label="Abonnement Expire Date"
+              name="abonnementExpireDate"
+              variant="outlined"
+              required
+              onChange={handleChange}
+              value={Form.abonnementExpireDate}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              fullWidth
+              label="Password"
+              name="password"
+              variant="outlined"
+              required
+              onChange={handleChange}
+              value={Form.password}
+            />
           </Grid>
         </Grid>
       </DialogContent>
@@ -111,17 +121,17 @@ function ModalUpdate({ popup, handleClose }) {
           Cancel
         </Button>
         <Button
-          onClick={handleSubmit}
           autoFocus
           variant="contained"
           type="submit"
-          data-test="buttonUpdateForm"
+          data-test="buttonAddForm"
+          onClick={handleSubmit}
         >
-          Update
+          Add
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-export default ModalUpdate;
+export default ModalAdd;
