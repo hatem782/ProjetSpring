@@ -1,32 +1,18 @@
 version: "3"
 
 services:
-  reactjs:
-    build:
-      context: ./bibleo-front
-      dockerfile: Dockerfile.react
-    ports:
-      - "3000:3000"
-
   springboot:
     build:
       context: ./bibleo-app
       dockerfile: Dockerfile.spring
     ports:
       - "8080:8080"
-    depends_on:
-      - mysql
-    links:
-      - mysql
 
-  mysql:
+  reactjs:
     build:
-      context: ./sqls
-      dockerfile: Dockerfile.mysql
+      context: ./bibleo-front
+      dockerfile: Dockerfile.react
     ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-
-volumes:
-  mysql-data:
+      - "3000:3000"
+    depends_on:
+      - springboot
