@@ -1,0 +1,5 @@
+user1 : hatem@user.com
+user2 : ilhem@user.com
+
+admin1 : hatem@admin.com
+admin2 : ilhem@admin.com
