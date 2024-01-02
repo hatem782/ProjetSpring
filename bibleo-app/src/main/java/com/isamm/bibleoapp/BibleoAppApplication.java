@@ -6,7 +6,10 @@ import org.springframework.context.ApplicationContext;
 
 import com.isamm.bibleoapp.DatabaseFiller.Filler;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+
 @SpringBootApplication
+@OpenAPIDefinition
 public class BibleoAppApplication {
 
 	public static void main(String[] args) {
