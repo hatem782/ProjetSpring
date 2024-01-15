@@ -99,6 +99,7 @@ export default function Login() {
             >
               <TextField
                 margin="normal"
+                defaultValue={"hatem@user.com"}
                 required
                 fullWidth
                 label="Email Address"
@@ -108,6 +109,7 @@ export default function Login() {
               />
               <TextField
                 margin="normal"
+                defaultValue={"hatem@user.com"}
                 required
                 fullWidth
                 name="password"

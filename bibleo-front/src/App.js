@@ -11,12 +11,14 @@ import BooksPage from "./pages/Library/BooksPage/BooksPage";
 import OneBookDetails from "./pages/Library/OneBookDetails/OneBookDetails";
 import Logout from "./pages/Dashboard/Logout/Logout";
 import AdherantEmprunts from "./pages/Library/AdherantEmprunts/AdherantEmprunts";
+import Toast from "./utils/Toast";
 
 function App() {
   const role = useSelector((state) => state.UserReducers.role);
 
   return (
     <div className="App">
+      <Toast />
       {role === "admin" && <AdminRoutes />}
       {role === "adherant" && <AdherantRoutes />}
       {role === null && <GuestRoutes />}

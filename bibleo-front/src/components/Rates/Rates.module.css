@@ -1,0 +1,10 @@
+.rates {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.rate {
+  color: #f7b635;
+  margin-right: 2px;
+}

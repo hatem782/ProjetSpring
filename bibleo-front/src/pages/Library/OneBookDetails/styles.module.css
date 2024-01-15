@@ -1,3 +1,27 @@
 .main_img {
   width: 100%;
 }
+
+.comment {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.content h4 {
+  margin: 0px;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.content h3 {
+  margin: 0px;
+}
