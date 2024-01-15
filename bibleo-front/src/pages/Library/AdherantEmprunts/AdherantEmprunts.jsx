@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
+import PaginationComponent from "../../../components/PaginationComponent";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -22,10 +23,19 @@ import UserNavbar from "../../../layouts/UserNavbar/UserNavbar";
 function AdherantEmprunts() {
   const data = useSelector((state) => state.MyEmpruntsReducers.emprunts);
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(0); // Track current page
+  const itemsPerPage = 2; // Number of items per page
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(GetMyEmprunts());
   }, [dispatch]);
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentData = data.slice(startIndex, endIndex);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -49,7 +59,7 @@ function AdherantEmprunts() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((row) => (
+              {currentData.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row?.livre?.titre}</TableCell>
@@ -65,6 +75,11 @@ function AdherantEmprunts() {
               ))}
             </TableBody>
           </Table>
+          <PaginationComponent
+            totalPages={Math.ceil(data.length / itemsPerPage)}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
         </Paper>
       </Box>
     </Box>

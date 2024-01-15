@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
+import PaginationComponent from "../../../components/PaginationComponent";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -29,6 +29,9 @@ function ManageBooks() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.BookReducers.books);
 
+  const [currentPage, setCurrentPage] = useState(0); // Track current page
+  const itemsPerPage = 5; // Number of items per page
+
   const [popup_add, open_add, close_add] = usePopup();
   const [popup_modif, open_modif, close_modif] = usePopup();
   const [popup_delete, open_delete, close_delete] = usePopup();
@@ -37,6 +40,14 @@ function ManageBooks() {
   useEffect(() => {
     dispatch(GetAllBook());
   }, []);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentData = data.slice(startIndex, endIndex);
 
   return (
     <Grid container spacing={2}>
@@ -62,7 +73,7 @@ function ManageBooks() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((row) => (
+              {currentData.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row.titre}</TableCell>
@@ -96,6 +107,11 @@ function ManageBooks() {
             </TableBody>
           </Table>
 
+          <PaginationComponent
+            totalPages={Math.ceil(data.length / itemsPerPage)}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
           {popup_add && (
             <ModalAdd popup={{ open: popup_add }} handleClose={close_add} />
           )}

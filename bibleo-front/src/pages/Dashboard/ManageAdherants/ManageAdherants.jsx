@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
+import PaginationComponent from "../../../components/PaginationComponent";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -27,6 +27,8 @@ function ManageAdherants() {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.AdherantReducers.adherants);
+  const [currentPage, setCurrentPage] = useState(0); // Track current page
+  const itemsPerPage = 2; // Number of items per page
 
   const [popup_add, open_add, close_add] = usePopup();
   const [popup_modif, open_modif, close_modif] = usePopup();
@@ -35,6 +37,15 @@ function ManageAdherants() {
   useEffect(() => {
     dispatch(GetAllAdherant());
   }, []);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentData = data.slice(startIndex, endIndex);
+
   return (
     <Paper sx={{ p: 2 }}>
       <h2>
@@ -57,7 +68,7 @@ function ManageAdherants() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {currentData.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.id}</TableCell>
               <TableCell>{row.fullname}</TableCell>
@@ -85,6 +96,12 @@ function ManageAdherants() {
           ))}
         </TableBody>
       </Table>
+
+      <PaginationComponent
+        totalPages={Math.ceil(data.length / itemsPerPage)}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
 
       {popup_add && (
         <ModalAdd popup={{ open: popup_add }} handleClose={close_add} />
