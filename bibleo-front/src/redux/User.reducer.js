@@ -30,7 +30,7 @@ export const UserReducers = (state = { ...InitialState }, action) => {
 export const LoginAdherant = ({ form, succ = () => {}, fail = () => {} }) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("/api/adherant/login-user", form);
+      const response = await axios.post("/api/admin/login-user", form);
       console.log(response.data);
 
       // SET ADHERANT IN LOCAL STORAGE

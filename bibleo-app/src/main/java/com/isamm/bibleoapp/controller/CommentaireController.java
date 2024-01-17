@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.isamm.bibleoapp.Entity.Commentaire;
@@ -21,6 +22,7 @@ public class CommentaireController {
 
     // save
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('USER')")
     public Commentaire saveCommentaire(@RequestBody Commentaire commentaire) {
         return commentaireService.saveCommentaire(commentaire);
     }
@@ -52,21 +54,24 @@ public class CommentaireController {
 
     // update
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public Commentaire updateCommentaire(@PathVariable("id") Long id, @RequestBody Commentaire commentaire) {
         return commentaireService.updateCommentaire(commentaire, id);
     }
 
     // delete
     @DeleteMapping("/delete/{id}")
-    public java.lang.String deleteCommentaire(@PathVariable Long id) {
+    @PreAuthorize("hasAuthority('USER')")
+    public String deleteCommentaire(@PathVariable Long id) {
         commentaireService.deleteCommentaire(id);
         return "Deleted Successfully";
     }
 
     // commentaire est signe
     @PutMapping("/signal/{id}")
-    public ResponseEntity<java.lang.String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
-        ResponseEntity<java.lang.String> response = commentaireService.signalCommentaire(id, raisonSign);
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
+        ResponseEntity<String> response = commentaireService.signalCommentaire(id, raisonSign);
 
         // You can add additional logic here if needed
 

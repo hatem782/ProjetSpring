@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ public class AutherController {
     private AuteurDao auteurDao;
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Auteur> getAllAuteurs(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "9") int size) {
@@ -41,6 +43,7 @@ public class AutherController {
     }
 
     @GetMapping("/all-all")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Auteur> getAllAuteurs() {
         // i will return all the authers
         List<Auteur> auteurs = auteurDao.findAll();
@@ -56,6 +59,7 @@ public class AutherController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Auteur> createAuteur(@RequestBody Auteur auteur) {
         // here i will create a new auther from the body request then i will return it
         Auteur createdAuteur = auteurDao.save(auteur);
@@ -63,6 +67,7 @@ public class AutherController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Auteur> updateAuteur(@RequestBody Auteur auteur, @PathVariable Long id) {
         System.out.println(auteur.toString());
         // 1 : i will check if the auther exist or not
@@ -78,6 +83,7 @@ public class AutherController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Auteur> deleteAuteur(@PathVariable Long id) {
         // 1 : i will check if the auther exist or not
         if (!auteurDao.findById(id).isPresent()) {
