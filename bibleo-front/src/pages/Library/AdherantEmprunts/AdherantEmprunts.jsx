@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
+import PaginationComponent from "../../../components/PaginationComponent";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -21,11 +22,20 @@ import UserNavbar from "../../../layouts/UserNavbar/UserNavbar";
 
 function AdherantEmprunts() {
   const data = useSelector((state) => state.MyEmpruntsReducers.emprunts);
+  const pages = useSelector((state) => state.MyEmpruntsReducers.pagination);
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(0); // Track current page
+  const itemsPerPage = 9; // Number of items per page
 
-  React.useEffect(() => {
-    dispatch(GetMyEmprunts());
-  }, [dispatch]);
+  useEffect(() => {
+    dispatch(GetMyEmprunts(currentPage));
+  }, [dispatch, currentPage]);
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -65,6 +75,13 @@ function AdherantEmprunts() {
               ))}
             </TableBody>
           </Table>
+          {pages && (
+            <PaginationComponent
+              totalPages={pages?.totalPages || 1}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+            />
+          )}
         </Paper>
       </Box>
     </Box>

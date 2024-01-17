@@ -30,13 +30,13 @@ export const MyEmpruntsReducers = (state = { ...InitialState }, action) => {
 };
 // ###################################### Actions ###################################### //
 
-export const GetMyEmprunts = () => {
+export const GetMyEmprunts = (page = 0) => {
   return async (dispatch, getState) => {
     try {
       const currentState = getState();
       const id = currentState.UserReducers.user.id;
       const response = await axios.get(
-        `/api/emprunt/get-emprunts-by-adherant-id/${id}`
+        `/api/emprunt/get-emprunts-by-adherant-id/${id}?page=${page}`
       );
       console.log(response.data);
       dispatch({

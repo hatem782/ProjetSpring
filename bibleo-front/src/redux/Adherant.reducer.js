@@ -26,10 +26,10 @@ export const AdherantReducers = (state = { ...InitialState }, action) => {
 };
 // ###################################### Actions ###################################### //
 
-export const GetAllAdherant = () => {
+export const GetAllAdherant = (page = 0) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/adherant/all");
+      const response = await axios.get(`/api/adherant/all?page=${page}`);
       console.log(response.data);
       dispatch({
         type: keys.SET_PAGINATION,

@@ -30,10 +30,10 @@ export const AutherReducers = (state = { ...InitialState }, action) => {
 };
 // ###################################### Actions ###################################### //
 
-export const GetAllAuther = () => {
+export const GetAllAuther = (page = 0) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/auther/all");
+      const response = await axios.get(`/api/auther/all?page=${page}`);
       console.log(response.data);
       dispatch({
         type: keys.SET_PAGINATION,

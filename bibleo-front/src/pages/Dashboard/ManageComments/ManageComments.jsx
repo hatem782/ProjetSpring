@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
+import PaginationComponent from "../../../components/PaginationComponent";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -25,12 +25,24 @@ import usePopup from "../../../hooks/usePupup";
 function ManageComments() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.CommentaireReducers.commentaires);
+  const pages = useSelector((state) => state.CommentaireReducers.pagination);
+  const [currentPage, setCurrentPage] = useState(0); // Track current page
+  const itemsPerPage = 9; // Number of items per page
+
   const [popup_modif, open_modif, close_modif] = usePopup();
   const [popup_signal, open_signal, close_signal] = usePopup();
 
   useEffect(() => {
-    dispatch(GetAllCommentaire());
-  }, []);
+    dispatch(GetAllCommentaire(currentPage));
+  }, [currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
   console.log(data);
   return (
     <Paper sx={{ p: 2 }}>
@@ -85,7 +97,13 @@ function ManageComments() {
           ))}
         </TableBody>
       </Table>
-
+      {pages && (
+        <PaginationComponent
+          totalPages={pages?.totalPages || 1}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
       {popup_modif && (
         <ModalUpdate popup={{ open: popup_modif }} handleClose={close_modif} />
       )}

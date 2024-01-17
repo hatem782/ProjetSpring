@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import PaginationComponent from "../../../components/PaginationComponent";
 import Stack from "@mui/material/Stack";
 import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
@@ -26,14 +26,25 @@ import usePopup from "../../../hooks/usePupup";
 function ManageAuthers() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.AutherReducers.authers);
+  const pages = useSelector((state) => state.AutherReducers.pagination);
+
+  const [currentPage, setCurrentPage] = useState(0); // Track current page
+  const itemsPerPage = 9; // Number of items per page
 
   const [popup_add, open_add, close_add] = usePopup();
   const [popup_modif, open_modif, close_modif] = usePopup();
   const [popup_delete, open_delete, close_delete] = usePopup();
 
   useEffect(() => {
-    dispatch(GetAllAuther());
-  }, []);
+    dispatch(GetAllAuther(currentPage));
+  }, [currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
   return (
     <Paper sx={{ p: 2 }}>
@@ -86,6 +97,14 @@ function ManageAuthers() {
           ))}
         </TableBody>
       </Table>
+
+      {pages && (
+        <PaginationComponent
+          totalPages={pages?.totalPages || 1}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
 
       {popup_add && (
         <ModalAdd popup={{ open: popup_add }} handleClose={close_add} />

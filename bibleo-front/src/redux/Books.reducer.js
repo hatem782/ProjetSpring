@@ -34,10 +34,10 @@ export const BookReducers = (state = { ...InitialState }, action) => {
 };
 // ###################################### Actions ###################################### //
 
-export const GetAllBook = () => {
+export const GetAllBook = (page = 0) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/book/all");
+      const response = await axios.get(`/api/book/all?page=${page}`);
       console.log(response.data);
       dispatch({
         type: keys.SET_PAGINATION,

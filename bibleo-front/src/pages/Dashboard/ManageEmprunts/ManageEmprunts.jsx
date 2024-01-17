@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
+import PaginationComponent from "../../../components/PaginationComponent";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -62,7 +62,8 @@ const MakeChipStatus = ({ row }) => {
 function ManageEmprunts() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.EmpruntsReducers.emprunts);
-
+  const [currentPage, setCurrentPage] = useState(0); // Track current page
+  const itemsPerPage = 2; // Number of items per page
   const typeEmprunts = useSelector((state) => state.EmpruntsReducers.get_type);
 
   const [popup_delete, open_delete, close_delete] = usePopup();
@@ -71,6 +72,14 @@ function ManageEmprunts() {
   useEffect(() => {
     dispatch(GetAllEmprunts());
   }, [typeEmprunts, dispatch]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentData = data.slice(startIndex, endIndex);
 
   const setTypeEmprunts = (type) => {
     dispatch(SetGetTypes(type));
@@ -130,7 +139,7 @@ function ManageEmprunts() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((row) => (
+              {currentData.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row?.livre?.titre}</TableCell>
@@ -192,7 +201,11 @@ function ManageEmprunts() {
               ))}
             </TableBody>
           </Table>
-
+          <PaginationComponent
+            totalPages={Math.ceil(data.length / itemsPerPage)}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
           {popup_delete && (
             <ModalDelete
               popup={{ open: popup_delete }}
