@@ -36,11 +36,12 @@ export const LoginAdherant = ({ form, succ = () => {}, fail = () => {} }) => {
       // SET ADHERANT IN LOCAL STORAGE
       localStorage.setItem("user_id", 1);
       localStorage.setItem("user_type", "adherant");
+      localStorage.setItem("spring_token", response.data.token);
       // SET ADHERANT IN LOCAL STORAGE
 
       dispatch({
         type: keys.SET_USER,
-        value: response.data,
+        value: response.data.adherant,
       });
       dispatch({
         type: keys.SET_ROLE,
@@ -65,12 +66,13 @@ export const LoginAdmin = ({ form, succ = () => {}, fail = () => {} }) => {
 
       // SET ADMIN IN LOCAL STORAGE
       localStorage.setItem("user_id", 1);
-      localStorage.setItem("user_type", "adherant");
+      localStorage.setItem("user_type", "admin");
+      localStorage.setItem("spring_token", response.data.token);
       // SET ADMIN IN LOCAL STORAGE
 
       dispatch({
         type: keys.SET_USER,
-        value: response.data,
+        value: response.data.admin,
       });
       dispatch({
         type: keys.SET_ROLE,
