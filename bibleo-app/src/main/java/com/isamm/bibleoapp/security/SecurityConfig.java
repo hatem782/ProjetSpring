@@ -36,13 +36,17 @@ public class SecurityConfig {
         return new UserInfoService();
     }
 
+    //nbadlou houni fel SecurityFilterChain
+
+
     // Configuring HttpSecurity
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors();
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/api/auth/**",
-                		
+                .requestMatchers("/api/**",
+                //ena zedha el hello		
+                "/hello",
                         "/v2/api-docs",
                         "/swagger-resources",
                         "/swagger-resources/**",
@@ -56,8 +60,9 @@ public class SecurityConfig {
                         
                         
                 ).permitAll()
-                .requestMatchers("/auth/user/**").authenticated()
-                .requestMatchers("/auth/admin/**").authenticated()
+                //ena badalet les url mte3 el user w admin
+                .requestMatchers("/api/adherant/login-user/**").authenticated()
+                .requestMatchers("/api/admin/login-admin/**").authenticated()
                                 .requestMatchers("/api/statistic").authenticated()
                                 .requestMatchers("/api/note").authenticated()
                                 
