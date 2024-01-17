@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.isamm.bibleoapp.Entity.Commentaire;
@@ -24,6 +25,7 @@ public class CommentaireController {
 
     //save
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('USER')")
     public Commentaire saveCommentaire(@RequestBody Commentaire commentaire) {
         return commentaireService.saveCommentaire(commentaire);
     }
@@ -48,6 +50,7 @@ public class CommentaireController {
 
     //update
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public Commentaire updateCommentaire(@PathVariable("id") Long id, @RequestBody Commentaire commentaire) {        
         return commentaireService.updateCommentaire(commentaire, id);
     }
@@ -57,6 +60,7 @@ public class CommentaireController {
 
     //delete
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public String deleteCommentaire(@PathVariable Long id) {
         commentaireService.deleteCommentaire(id);
         return"Deleted Successfully";
@@ -65,6 +69,7 @@ public class CommentaireController {
 
     //commentaire est signe 
      @PutMapping("/signal/{id}")
+     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
         ResponseEntity<String> response = commentaireService.signalCommentaire(id,raisonSign);
         

@@ -35,7 +35,7 @@ public class Filler {
                 PasswordEncoder passwordEncoder = ctx.getBean(PasswordEncoder.class);
                 Langue langue = Langue.Arabe;
                 AuteurStatut retourneValue = AuteurStatut.Vivant;
-
+                
                 // ########################################################
                 // ########################################################
                 // #################### ROLES CREATION ####################

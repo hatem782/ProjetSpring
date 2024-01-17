@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +27,7 @@ import com.isamm.bibleoapp.Entity.Emprunt;
 import com.isamm.bibleoapp.Entity.Review;
 import com.isamm.bibleoapp.Entity.Role;
 import com.isamm.bibleoapp.Entity.User;
-import com.isamm.bibleoapp.SubClasses.ClassLogin;
+import com.isamm.bibleoapp.SubClasses.ClassLoginAdmin;
 import com.isamm.bibleoapp.dao.RoleDao;
 import com.isamm.bibleoapp.dao.UserDao;
 
@@ -48,6 +49,7 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Adherant> getAllAdherant(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "9") int size) {
@@ -59,6 +61,7 @@ public class UserController {
     }
 
     @GetMapping("/all-all")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Adherant> getAllAdherant() {
         // i will return all the adherant
         List<Adherant> adherant = userDao.findAllUsers();
@@ -67,6 +70,7 @@ public class UserController {
     }
 
     @GetMapping("/one/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<User> getAdherantById(@PathVariable Long id) {
         // here i will find adherant by id and i will return it if exist or i will
         // not found
@@ -75,6 +79,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Adherant> createAdherant(@RequestBody Adherant adherant) {
 
         // here i will get the Role of the adherant and i will set it to the adherant
@@ -87,31 +92,10 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createAdherant);
     }
 
-    @PostMapping("/login-user")
-    public ResponseEntity<Adherant> LoginUser(@RequestBody ClassLogin login) {
 
-        // let's find the user by email
-        Optional<Adherant> user = userDao.findUserByEmail(login.getEmail());
-        if (!user.isPresent()) {
-            System.out.println("#################################################");
-            System.out.println("NOT FOUND USER WITH THIS EMAIL " + login.getEmail());
-            System.out.println("#################################################");
-            return ResponseEntity.notFound().build();
-        }
-
-        // let's check if the password is correct or not
-        if (!passwordEncoder.matches(login.getPassword(), user.get().getPassword())) {
-            System.out.println("#################################################");
-            System.out.println("NOT FOUND USER WITH THIS PASSWORD " + login.getPassword());
-            System.out.println("#################################################");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-        // let's return the user
-        return ResponseEntity.status(HttpStatus.OK).body(user.get());
-    }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Adherant> updateAdherant(@RequestBody Adherant adherant,
             @PathVariable Long id) {
         System.out.println(adherant.toString());
@@ -128,6 +112,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Adherant> deleteAdherant(@PathVariable Long id) {
         // 1 : i will check if the adherant exist or not
         if (!userDao.findById(id).isPresent()) {

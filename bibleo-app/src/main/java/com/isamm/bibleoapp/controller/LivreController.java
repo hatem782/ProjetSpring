@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,6 +61,7 @@ public class LivreController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Livre> createLivre(@RequestBody Livre livre) {
         // here i will create a new livre from the body request then i will return it
         Livre createdLivre = livreDao.save(livre);
@@ -67,6 +69,7 @@ public class LivreController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Livre> updateLivre(@RequestBody Livre livre, @PathVariable Long id) {
         System.out.println(livre.toString());
         // 1 : i will check if the livre exist or not
@@ -82,6 +85,7 @@ public class LivreController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Livre> deleteLivre(@PathVariable Long id) {
         // 1 : i will check if the livre exist or not
         if (!livreDao.findById(id).isPresent()) {

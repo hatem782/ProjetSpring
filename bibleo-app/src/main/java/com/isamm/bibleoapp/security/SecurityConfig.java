@@ -44,9 +44,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors();
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/api/**",
+                .requestMatchers(
+                "/api/admin/login-user",
+                "/api/admin/login-admin",
                 //ena zedha el hello		
-                "/hello",
+                
                         "/v2/api-docs",
                         "/swagger-resources",
                         "/swagger-resources/**",
@@ -61,12 +63,15 @@ public class SecurityConfig {
                         
                 ).permitAll()
                 //ena badalet les url mte3 el user w admin
-                .requestMatchers("/api/adherant/login-user/**").authenticated()
-                .requestMatchers("/api/admin/login-admin/**").authenticated()
-                                .requestMatchers("/api/statistic").authenticated()
-                                .requestMatchers("/api/note").authenticated()
-                                
-                                .requestMatchers("/api/**").authenticated()
+                //.requestMatchers("/api/adherant/login-user/**").authenticated()
+                //.requestMatchers("/api/admin/login-admin/**").authenticated()
+                                .requestMatchers("/api/auther/**").authenticated()
+                                .requestMatchers("/api/commentaire/**").authenticated()
+                                .requestMatchers("/api/emprunt/**").authenticated()
+                                .requestMatchers("/api/book/**").authenticated()
+                                .requestMatchers("/api/review/**").authenticated()
+                                .requestMatchers("/api/adherant/**").authenticated()
+                                .requestMatchers("/hello").authenticated()
                 ).csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

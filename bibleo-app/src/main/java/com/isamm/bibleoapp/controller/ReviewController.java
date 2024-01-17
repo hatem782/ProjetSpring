@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -26,12 +27,14 @@ public class ReviewController {
 
     //save
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('USER')")
     public Review saveReview(@RequestBody Review review) {
         return reviewService.saveReview(review);
     }
    
     //get All
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Review> getAllReviews() {
         return reviewService.getAllReviews();
     }
@@ -51,6 +54,7 @@ public class ReviewController {
 
     //update
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public Review updateReview(@PathVariable("id") Long id, @RequestBody Review review) {        
         return reviewService.updateReview(review, id);
 
@@ -61,6 +65,7 @@ public class ReviewController {
 
     //delete
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public String deleteReview(@PathVariable Long id) {
         reviewService.deleteReview(id);
         return"Deleted Successfully";

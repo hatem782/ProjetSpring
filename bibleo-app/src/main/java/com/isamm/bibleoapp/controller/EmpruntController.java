@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +47,7 @@ public class EmpruntController {
 
     // Create Emprunt - Adhrant
     @PostMapping("/create_demande_emprunt_book")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Emprunt> MakeDemandeEmprunt(@RequestBody Emprunt emprunt,
             @RequestParam Long id_user,
             @RequestParam Long id_book) {
@@ -94,6 +96,7 @@ public class EmpruntController {
 
     // Refuse Demand - Admin
     @PutMapping("/refuse_demande_emprunt_book/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Emprunt> RefuseDemandeEmprunt(@PathVariable Long id) {
 
         // let's find the emprunt by id
@@ -125,6 +128,7 @@ public class EmpruntController {
     // Accept Demand - Admin
     // Accept Demand - Admin (tensach tna9s ktob )
     @PutMapping("/accept_demande_emprunt_book/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Emprunt> AcceptDemandeEmprunt(@PathVariable Long id) {
 
         // let's find the emprunt by id
@@ -168,6 +172,7 @@ public class EmpruntController {
 
     // Finish Emprunt - User (tensach tzyd ktob)
     @PutMapping("/finish_demande_emprunt_book/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Emprunt> FinishEmprunt(@PathVariable Long id) {
 
         // let's find the emprunt by id
@@ -228,6 +233,7 @@ public class EmpruntController {
 
     // 5ales 5teytou
     @PutMapping("/payed-amandes/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Emprunt> PayedAmandeOFEmprunt(@PathVariable Long id) {
 
         // let's find the emprunt by id
@@ -268,6 +274,7 @@ public class EmpruntController {
     }
 
     @GetMapping("/get-emprunts-by-livre-id/{my_id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Emprunt> getEmpruntsByLivreId(@PathVariable Long my_id,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "9") int size) {
@@ -278,7 +285,8 @@ public class EmpruntController {
     }
 
     // Get Emprunt By Id - Admin
-    @GetMapping("/get-all-emprunts") //
+    @GetMapping("/get-all-emprunts")
+    @PreAuthorize("hasAuthority('ADMIN')") //
     public Page<Emprunt> getAllEmprunts(@RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
@@ -289,6 +297,7 @@ public class EmpruntController {
 
     // Get 5teya Emprunt
     @GetMapping("/get-5teya-emprunts") //
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Emprunt> get5teyaEmprunts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -299,6 +308,7 @@ public class EmpruntController {
     }
 
     @GetMapping("/get-en-attente-emprunts") //
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Emprunt> getEnAttenteEmprunts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -308,6 +318,7 @@ public class EmpruntController {
     }
 
     @GetMapping("/get-refuse-emprunts") //
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Emprunt> getRefuseEmprunts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -317,6 +328,7 @@ public class EmpruntController {
     }
 
     @GetMapping("/get-retourne-emprunts") //
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Emprunt> getRetourneEmprunts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -326,6 +338,7 @@ public class EmpruntController {
     }
 
     @GetMapping("/get-emprunte-emprunts")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Emprunt> getEmprunteEmprunts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -335,6 +348,7 @@ public class EmpruntController {
     }
 
     @GetMapping("/get-retards-emprunts")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Emprunt> getRerardEmprunts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -344,6 +358,7 @@ public class EmpruntController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Livre> DeleteEmprunt(@PathVariable Long id) {
 
         // let's find the emprunt by id

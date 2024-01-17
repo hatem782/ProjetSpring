@@ -21,11 +21,13 @@ public class UserInfoDetails implements UserDetails {
     public UserInfoDetails(User userInfo) {
         name = userInfo.getEmail();
         password = userInfo.getPassword();
-        authorities = Arrays.stream(userInfo.getRole().getName().split(""))
+        authorities = Arrays.stream(userInfo.getRole().getName().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
         id=userInfo.getId().toString();
     }
+
+    
     
     
     
