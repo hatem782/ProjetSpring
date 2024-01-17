@@ -26,17 +26,18 @@ import usePopup from "../../../hooks/usePupup";
 function ManageAuthers() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.AutherReducers.authers);
+  const pages = useSelector((state) => state.AutherReducers.pagination);
 
   const [currentPage, setCurrentPage] = useState(0); // Track current page
-  const itemsPerPage = 2; // Number of items per page
+  const itemsPerPage = 9; // Number of items per page
 
   const [popup_add, open_add, close_add] = usePopup();
   const [popup_modif, open_modif, close_modif] = usePopup();
   const [popup_delete, open_delete, close_delete] = usePopup();
 
   useEffect(() => {
-    dispatch(GetAllAuther());
-  }, []);
+    dispatch(GetAllAuther(currentPage));
+  }, [currentPage]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -44,7 +45,6 @@ function ManageAuthers() {
 
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
 
   return (
     <Paper sx={{ p: 2 }}>
@@ -66,7 +66,7 @@ function ManageAuthers() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {currentData.map((row) => (
+          {data.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.id}</TableCell>
               <TableCell>
@@ -98,11 +98,13 @@ function ManageAuthers() {
         </TableBody>
       </Table>
 
-      <PaginationComponent
-        totalPages={Math.ceil(data.length / itemsPerPage)}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      {pages && (
+        <PaginationComponent
+          totalPages={pages?.totalPages || 1}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
 
       {popup_add && (
         <ModalAdd popup={{ open: popup_add }} handleClose={close_add} />

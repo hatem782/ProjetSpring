@@ -25,16 +25,16 @@ import usePopup from "../../../hooks/usePupup";
 function ManageComments() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.CommentaireReducers.commentaires);
-
+  const pages = useSelector((state) => state.CommentaireReducers.pagination);
   const [currentPage, setCurrentPage] = useState(0); // Track current page
-  const itemsPerPage = 5; // Number of items per page
+  const itemsPerPage = 9; // Number of items per page
 
   const [popup_modif, open_modif, close_modif] = usePopup();
   const [popup_signal, open_signal, close_signal] = usePopup();
 
   useEffect(() => {
-    dispatch(GetAllCommentaire());
-  }, []);
+    dispatch(GetAllCommentaire(currentPage));
+  }, [currentPage]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -42,7 +42,6 @@ function ManageComments() {
 
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
 
   console.log(data);
   return (
@@ -62,7 +61,7 @@ function ManageComments() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {currentData.map((row) => (
+          {data.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.id}</TableCell>
               <TableCell>{row.contenu}</TableCell>
@@ -98,11 +97,13 @@ function ManageComments() {
           ))}
         </TableBody>
       </Table>
-      <PaginationComponent
-        totalPages={Math.ceil(data.length / itemsPerPage)}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      {pages && (
+        <PaginationComponent
+          totalPages={pages?.totalPages || 1}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
       {popup_modif && (
         <ModalUpdate popup={{ open: popup_modif }} handleClose={close_modif} />
       )}

@@ -27,16 +27,17 @@ function ManageAdherants() {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.AdherantReducers.adherants);
+  const pages = useSelector((state) => state.AdherantReducers.pagination);
   const [currentPage, setCurrentPage] = useState(0); // Track current page
-  const itemsPerPage = 2; // Number of items per page
+  const itemsPerPage = 9; // Number of items per page
 
   const [popup_add, open_add, close_add] = usePopup();
   const [popup_modif, open_modif, close_modif] = usePopup();
   const [popup_delete, open_delete, close_delete] = usePopup();
 
   useEffect(() => {
-    dispatch(GetAllAdherant());
-  }, []);
+    dispatch(GetAllAdherant(currentPage));
+  }, [currentPage]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -44,7 +45,6 @@ function ManageAdherants() {
 
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
 
   return (
     <Paper sx={{ p: 2 }}>
@@ -68,7 +68,7 @@ function ManageAdherants() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {currentData.map((row) => (
+          {data.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.id}</TableCell>
               <TableCell>{row.fullname}</TableCell>
@@ -97,11 +97,13 @@ function ManageAdherants() {
         </TableBody>
       </Table>
 
-      <PaginationComponent
-        totalPages={Math.ceil(data.length / itemsPerPage)}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      {pages && (
+        <PaginationComponent
+          totalPages={pages?.totalPages || 1}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
 
       {popup_add && (
         <ModalAdd popup={{ open: popup_add }} handleClose={close_add} />

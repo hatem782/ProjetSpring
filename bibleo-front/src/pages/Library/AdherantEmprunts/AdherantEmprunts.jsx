@@ -22,20 +22,20 @@ import UserNavbar from "../../../layouts/UserNavbar/UserNavbar";
 
 function AdherantEmprunts() {
   const data = useSelector((state) => state.MyEmpruntsReducers.emprunts);
+  const pages = useSelector((state) => state.MyEmpruntsReducers.pagination);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(0); // Track current page
-  const itemsPerPage = 2; // Number of items per page
+  const itemsPerPage = 9; // Number of items per page
 
   useEffect(() => {
-    dispatch(GetMyEmprunts());
-  }, [dispatch]);
+    dispatch(GetMyEmprunts(currentPage));
+  }, [dispatch, currentPage]);
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -59,7 +59,7 @@ function AdherantEmprunts() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {currentData.map((row) => (
+              {data.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row?.livre?.titre}</TableCell>
@@ -75,11 +75,13 @@ function AdherantEmprunts() {
               ))}
             </TableBody>
           </Table>
-          <PaginationComponent
-            totalPages={Math.ceil(data.length / itemsPerPage)}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
+          {pages && (
+            <PaginationComponent
+              totalPages={pages?.totalPages || 1}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+            />
+          )}
         </Paper>
       </Box>
     </Box>

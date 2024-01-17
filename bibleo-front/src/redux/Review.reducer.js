@@ -26,10 +26,10 @@ export const ReviewReducers = (state = { ...InitialState }, action) => {
 };
 // ###################################### Actions ###################################### //
 
-export const GetAllReview = () => {
+export const GetAllReview = (page = 0) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/review/page");
+      const response = await axios.get(`/api/review/page?page=${page}`);
       console.log(response.data);
       dispatch({
         type: keys.SET_PAGINATION,

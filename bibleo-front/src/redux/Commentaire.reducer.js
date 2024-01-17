@@ -26,10 +26,10 @@ export const CommentaireReducers = (state = { ...InitialState }, action) => {
 };
 // ###################################### Actions ###################################### //
 
-export const GetAllCommentaire = () => {
+export const GetAllCommentaire = (page = 0) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/commentaire/page");
+      const response = await axios.get(`/api/commentaire/page?page=${page}`);
       console.log(response.data);
       dispatch({
         type: keys.SET_PAGINATION,
