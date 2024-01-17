@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -95,13 +94,13 @@ public class CommentaireService {
     }
 
     // commentaire signe
-    public ResponseEntity<String> signalCommentaire(Long id, String raisonSign) {
+    public ResponseEntity<java.lang.String> signalCommentaire(Long id, String raisonSign) {
         Optional<Commentaire> commentaireOp = commentaireDao.findById(id);
 
         if (commentaireOp.isPresent()) {
             Commentaire commentaire = commentaireOp.get();
             commentaire.setEstSignale(true);
-            commentaire.setRaisonSign(raisonSign);
+            commentaire.setRaisonSign(java.lang.String.valueOf(raisonSign));
             commentaireDao.save(commentaire);
             return ResponseEntity.ok("Commentaire signaled successfully");
         } else {

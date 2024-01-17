@@ -5,13 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.isamm.bibleoapp.Entity.Commentaire;
-import com.isamm.bibleoapp.dao.CommentaireDao;
 import com.isamm.bibleoapp.service.CommentaireService;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
 
@@ -68,8 +65,8 @@ public class CommentaireController {
 
     // commentaire est signe
     @PutMapping("/signal/{id}")
-    public ResponseEntity<String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
-        ResponseEntity<String> response = commentaireService.signalCommentaire(id, raisonSign);
+    public ResponseEntity<java.lang.String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
+        ResponseEntity<java.lang.String> response = commentaireService.signalCommentaire(id, raisonSign);
 
         // You can add additional logic here if needed
 
