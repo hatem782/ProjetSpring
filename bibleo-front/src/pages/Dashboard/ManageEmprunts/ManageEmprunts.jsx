@@ -62,24 +62,16 @@ const MakeChipStatus = ({ row }) => {
 function ManageEmprunts() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.EmpruntsReducers.emprunts);
+  const pages = useSelector((state) => state.EmpruntsReducers.pagination);
   const [currentPage, setCurrentPage] = useState(0); // Track current page
-  const itemsPerPage = 2; // Number of items per page
   const typeEmprunts = useSelector((state) => state.EmpruntsReducers.get_type);
 
   const [popup_delete, open_delete, close_delete] = usePopup();
   const [popup_show, open_show, close_show] = usePopup();
 
   useEffect(() => {
-    dispatch(GetAllEmprunts());
-  }, [typeEmprunts, dispatch]);
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
+    dispatch(GetAllEmprunts(currentPage));
+  }, [typeEmprunts, dispatch, currentPage]);
 
   const setTypeEmprunts = (type) => {
     dispatch(SetGetTypes(type));
@@ -139,7 +131,7 @@ function ManageEmprunts() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {currentData.map((row) => (
+              {data.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row?.livre?.titre}</TableCell>
@@ -202,9 +194,9 @@ function ManageEmprunts() {
             </TableBody>
           </Table>
           <PaginationComponent
-            totalPages={Math.ceil(data.length / itemsPerPage)}
+            totalPages={pages?.totalPages || 1}
             currentPage={currentPage}
-            onPageChange={handlePageChange}
+            onPageChange={setCurrentPage}
           />
           {popup_delete && (
             <ModalDelete

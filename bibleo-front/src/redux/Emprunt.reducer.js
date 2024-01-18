@@ -81,12 +81,12 @@ export const EmpruntsReducers = (state = { ...InitialState }, action) => {
 };
 // ###################################### Actions ###################################### //
 
-export const GetAllEmprunts = () => {
+export const GetAllEmprunts = (page = 0) => {
   return async (dispatch, getState) => {
     try {
       const currentState = getState();
       const response = await axios.get(
-        currentState.EmpruntsReducers.get_type.url
+        currentState.EmpruntsReducers.get_type.url + `?page=${page}`
       );
       console.log(response.data);
       dispatch({
