@@ -62,7 +62,7 @@ public class CommentaireController {
     // delete
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAuthority('USER')")
-    public String deleteCommentaire(@PathVariable Long id) {
+    public java.lang.String deleteCommentaire(@PathVariable Long id) {
         commentaireService.deleteCommentaire(id);
         return "Deleted Successfully";
     }
@@ -70,8 +70,8 @@ public class CommentaireController {
     // commentaire est signe
     @PutMapping("/signal/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
-        ResponseEntity<String> response = commentaireService.signalCommentaire(id, raisonSign);
+    public ResponseEntity<java.lang.String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
+        ResponseEntity<java.lang.String> response = commentaireService.signalCommentaire(id, raisonSign);
 
         // You can add additional logic here if needed
 
