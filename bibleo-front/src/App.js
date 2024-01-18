@@ -6,15 +6,22 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Login/Login";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BooksPage from "./pages/Library/BooksPage/BooksPage";
 import OneBookDetails from "./pages/Library/OneBookDetails/OneBookDetails";
 import Logout from "./pages/Dashboard/Logout/Logout";
 import AdherantEmprunts from "./pages/Library/AdherantEmprunts/AdherantEmprunts";
 import Toast from "./utils/Toast";
+import { useEffect } from "react";
+import { GetUserFromLocalStorage } from "./redux/User.reducer";
 
 function App() {
   const role = useSelector((state) => state.UserReducers.role);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(GetUserFromLocalStorage());
+  }, []);
 
   return (
     <div className="App">

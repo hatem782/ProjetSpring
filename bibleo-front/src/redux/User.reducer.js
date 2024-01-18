@@ -38,6 +38,8 @@ export const LoginAdherant = ({ form, succ = () => {}, fail = () => {} }) => {
       localStorage.setItem("user_type", "adherant");
       localStorage.setItem("spring_token", response.data.token);
       // SET ADHERANT IN LOCAL STORAGE
+      let user_json_string = JSON.stringify(response.data.adherant);
+      localStorage.setItem("user", user_json_string);
 
       dispatch({
         type: keys.SET_USER,
@@ -69,6 +71,8 @@ export const LoginAdmin = ({ form, succ = () => {}, fail = () => {} }) => {
       localStorage.setItem("user_type", "admin");
       localStorage.setItem("spring_token", response.data.token);
       // SET ADMIN IN LOCAL STORAGE
+      let user_json_string = JSON.stringify(response.data.admin);
+      localStorage.setItem("user", user_json_string);
 
       dispatch({
         type: keys.SET_USER,
@@ -138,6 +142,8 @@ export const LogoutAction = () => {
     try {
       localStorage.removeItem("user_id");
       localStorage.removeItem("user_type");
+      localStorage.removeItem("spring_token");
+      localStorage.removeItem("user");
       dispatch({
         type: keys.SET_USER,
         value: null,
@@ -145,6 +151,29 @@ export const LogoutAction = () => {
       dispatch({
         type: keys.SET_ROLE,
         value: null,
+      });
+    } catch (error) {
+      dispatch({
+        type: keys.SET_PAYLOAD,
+        value: false,
+      });
+    }
+  };
+};
+
+export const GetUserFromLocalStorage = () => {
+  return async (dispatch) => {
+    try {
+      let user_json_string = localStorage.getItem("user");
+      let user = JSON.parse(user_json_string);
+      let user_type = localStorage.getItem("user_type");
+      dispatch({
+        type: keys.SET_USER,
+        value: user,
+      });
+      dispatch({
+        type: keys.SET_ROLE,
+        value: user_type,
       });
     } catch (error) {
       dispatch({
