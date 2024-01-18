@@ -11,15 +11,18 @@ import styles from "./styles.module.css";
 import { GetAllBook } from "../../../redux/Books.reducer";
 import { useNavigate } from "react-router-dom";
 import UserNavbar from "../../../layouts/UserNavbar/UserNavbar";
+import PaginationComponent from "../../../components/PaginationComponent";
 
 export default function BooksPage() {
   const books = useSelector((state) => state.BookReducers.books);
+  const pages = useSelector((state) => state.BookReducers.pagination);
+  const [currentPage, setCurrentPage] = React.useState(0); // Track current page
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    dispatch(GetAllBook());
-  }, []);
+    dispatch(GetAllBook(currentPage));
+  }, [currentPage]);
 
   const GoToOneBook = (book) => {
     navigate(`/library/book/${book.id}`);
@@ -58,6 +61,15 @@ export default function BooksPage() {
               </Grid>
             );
           })}
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            {pages && (
+              <PaginationComponent
+                totalPages={pages?.totalPages || 1}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+              />
+            )}
+          </Grid>
         </Grid>
       </Box>
     </Box>

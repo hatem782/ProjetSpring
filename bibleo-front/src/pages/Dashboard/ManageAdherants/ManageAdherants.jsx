@@ -43,9 +43,6 @@ function ManageAdherants() {
     setCurrentPage(newPage);
   };
 
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
   return (
     <Paper sx={{ p: 2 }}>
       <h2>
