@@ -28,26 +28,26 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthFilter authFilter;
 
-    // User Creation
+
     
-    
+    // Création du service utilisateur
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserInfoService();
     }
 
-    //nbadlou houni fel SecurityFilterChain
+   
 
 
     // Configuring HttpSecurity
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors();
+        http.cors();// Configuration CORS
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers(
                 "/api/admin/login-user",
                 "/api/admin/login-admin",
-                //ena zedha el hello		
+               	
                 
                         "/v2/api-docs",
                         "/swagger-resources",
@@ -62,9 +62,7 @@ public class SecurityConfig {
                         
                         
                 ).permitAll()
-                //ena badalet les url mte3 el user w admin
-                //.requestMatchers("/api/adherant/login-user/**").authenticated()
-                //.requestMatchers("/api/admin/login-admin/**").authenticated()
+                // Ajout des URL nécessitant une authentification
                                 .requestMatchers("/api/auther/**").authenticated()
                                 .requestMatchers("/api/commentaire/**").authenticated()
                                 .requestMatchers("/api/emprunt/**").authenticated()
@@ -87,6 +85,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // Configuration du fournisseur d'authentification
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -95,6 +94,7 @@ public class SecurityConfig {
         return authenticationProvider;
     }
 
+    // Configuration du gestionnaire d'authentification
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

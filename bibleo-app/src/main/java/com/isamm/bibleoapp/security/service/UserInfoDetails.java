@@ -12,15 +12,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserInfoDetails implements UserDetails {
+    // Informations d'utilisateur
+    private String name; // Nom d'utilisateur (email)
+    private String password; // Mot de passe
+    private List<GrantedAuthority> authorities; // Rôles et autorisations de l'utilisateur
+    private String id ; // Identifiant de l'utilisateur dans la base de données
+ 
 
-    private String name;
-    private String password;
-    private List<GrantedAuthority> authorities;
-    private String id ;
-
+    // Constructeur prenant un objet User pour initialiser les détails de l'utilisateur
     public UserInfoDetails(User userInfo) {
         name = userInfo.getEmail();
         password = userInfo.getPassword();
+
+         // Convertir les rôles de l'utilisateur en objets GrantedAuthority
         authorities = Arrays.stream(userInfo.getRole().getName().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
@@ -30,8 +34,10 @@ public class UserInfoDetails implements UserDetails {
     
     
     
-    
+     // Getter pour l'identifiant de l'utilisateur
     public String getId() {return this.id;}
+
+    // Implémentation de l'interface UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -49,21 +55,21 @@ public class UserInfoDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return true;// Le compte de l'utilisateur n'expire jamais
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return true;// Le compte de l'utilisateur n'est jamais verrouillé
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return true;// Les informations d'identification de l'utilisateur ne sont jamais expirées
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return true;// L'utilisateur est toujours activé
     }
 }
