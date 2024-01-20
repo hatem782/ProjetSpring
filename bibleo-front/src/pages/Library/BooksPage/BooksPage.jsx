@@ -82,6 +82,23 @@ export default function BooksPage() {
     );
   };
 
+  const Reset = () => {
+    setCurrentPage(0);
+    setForm({
+      titre: "All",
+      genre: "All",
+      auteur: -1,
+    });
+    dispatch(
+      GetAllBookWithFilter({
+        page: 0,
+        titre: "All",
+        auteur: -1,
+        genre: "All",
+      })
+    );
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <UserNavbar />
@@ -137,7 +154,12 @@ export default function BooksPage() {
           <Grid item xs={3} sm={3} md={3} lg={3}>
             <Grid container spacing={2}>
               <Grid item xs={6} sm={6} md={6} lg={6}>
-                <Button fullWidth variant="outlined" size="large">
+                <Button
+                  fullWidth
+                  onClick={Reset}
+                  variant="outlined"
+                  size="large"
+                >
                   Reset
                 </Button>
               </Grid>
