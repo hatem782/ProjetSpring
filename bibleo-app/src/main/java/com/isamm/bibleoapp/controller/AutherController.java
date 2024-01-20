@@ -43,7 +43,6 @@ public class AutherController {
     }
 
     @GetMapping("/all-all")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Auteur> getAllAuteurs() {
         // i will return all the authers
         List<Auteur> auteurs = auteurDao.findAll();

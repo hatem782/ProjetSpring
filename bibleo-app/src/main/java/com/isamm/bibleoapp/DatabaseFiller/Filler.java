@@ -142,7 +142,7 @@ public class Filler {
                                 12,
                                 11,
                                 "https://www.junkybooks.com/administrator/bookimages/63547955185676.26019912.jpg",
-                                "genre1",
+                                "Finance",
                                 langue,
                                 auteur1);
                 livreDao.save(livre1);
@@ -168,7 +168,7 @@ public class Filler {
                                 12,
                                 5,
                                 "https://www.junkybooks.com/administrator/bookimages/65077056c47326.57519022.jpg",
-                                "Romance",
+                                "Littérature",
                                 langue,
                                 auteur2);
                 livreDao.save(livre3);
@@ -181,7 +181,7 @@ public class Filler {
                                 12,
                                 5,
                                 "https://www.junkybooks.com/administrator/bookimages/62f864c6f124c2.67423707.PNG",
-                                "Life",
+                                "Philosophie",
                                 langue,
                                 auteur2);
                 livreDao.save(livre4);
@@ -194,7 +194,7 @@ public class Filler {
                                 12,
                                 5,
                                 "https://www.junkybooks.com/administrator/bookimages/62bb5bfe51fa40.75435426.jpg",
-                                "Mystry & Thriller",
+                                "Littérature",
                                 langue,
                                 auteur2);
                 livreDao.save(livre5);
@@ -220,7 +220,7 @@ public class Filler {
                                 12,
                                 5,
                                 "https://www.junkybooks.com/administrator/bookimages/6354712cc06591.09795574.jpg",
-                                "Mystry & Thriller",
+                                "Littérature",
                                 langue,
                                 auteur2);
                 livreDao.save(livre7);
@@ -233,7 +233,7 @@ public class Filler {
                                 12,
                                 5,
                                 "https://www.junkybooks.com/administrator/bookimages/64e23253c09290.78632919.jpg",
-                                "Life",
+                                "Philosophie",
                                 langue,
                                 auteur2);
                 livreDao.save(livre8);
@@ -246,7 +246,7 @@ public class Filler {
                                 20,
                                 5,
                                 "https://covers.openlibrary.org/b/id/12009823-L.jpg",
-                                "Life",
+                                "Philosophie",
                                 langue,
                                 auteur2);
                 livreDao.save(livre9);
@@ -259,7 +259,7 @@ public class Filler {
                                 20,
                                 5,
                                 "https://covers.openlibrary.org/b/id/113579-L.jpg",
-                                "Story",
+                                "Littérature",
                                 langue,
                                 auteur2);
                 livreDao.save(livre10);
@@ -272,7 +272,7 @@ public class Filler {
                                 20,
                                 5,
                                 "https://covers.openlibrary.org/b/id/13305903-L.jpg",
-                                "Litrature",
+                                "Littérature",
                                 langue,
                                 auteur2);
                 livreDao.save(livre11);
@@ -285,7 +285,7 @@ public class Filler {
                                 20,
                                 5,
                                 "https://covers.openlibrary.org/b/id/368945-L.jpg",
-                                "Story",
+                                "Littérature",
                                 langue,
                                 auteur2);
                 livreDao.save(livre12);
