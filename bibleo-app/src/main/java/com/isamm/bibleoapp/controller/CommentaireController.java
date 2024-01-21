@@ -53,7 +53,6 @@ public class CommentaireController {
 
     // update
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasAuthority('USER')")
     public Commentaire updateCommentaire(@PathVariable("id") Long id, @RequestBody Commentaire commentaire) {
         return commentaireService.updateCommentaire(commentaire, id);
     }

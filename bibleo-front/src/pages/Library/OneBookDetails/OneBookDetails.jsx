@@ -57,8 +57,10 @@ export default function OneBookDetails() {
       });
 
       setRates(sum / reviews.length);
+    } else {
+      setRates(0);
     }
-  }, [reviews]);
+  }, [reviews, book, params]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
