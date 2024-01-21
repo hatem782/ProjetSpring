@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.isamm.bibleoapp.Entity.Commentaire;
 import com.isamm.bibleoapp.dao.CommentaireDao;
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
 
 @Service
 public class CommentaireService {
@@ -94,13 +93,14 @@ public class CommentaireService {
     }
 
     // commentaire signe
-    public ResponseEntity<java.lang.String> signalCommentaire(Long id, String raisonSign) {
+//commentaire signe
+    public ResponseEntity<String> signalCommentaire(Long id, String raisonSign) {
         Optional<Commentaire> commentaireOp = commentaireDao.findById(id);
 
         if (commentaireOp.isPresent()) {
             Commentaire commentaire = commentaireOp.get();
             commentaire.setEstSignale(true);
-            commentaire.setRaisonSign(java.lang.String.valueOf(raisonSign));
+            commentaire.setRaisonSign(raisonSign);
             commentaireDao.save(commentaire);
             return ResponseEntity.ok("Commentaire signaled successfully");
         } else {
