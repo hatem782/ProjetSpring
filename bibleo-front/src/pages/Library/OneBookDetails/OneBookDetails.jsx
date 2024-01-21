@@ -57,8 +57,10 @@ export default function OneBookDetails() {
       });
 
       setRates(sum / reviews.length);
+    } else {
+      setRates(0);
     }
-  }, [reviews]);
+  }, [reviews, book, params]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -86,7 +88,12 @@ export default function OneBookDetails() {
                 }}
               >
                 <h1>About Book</h1>
-                <Rates number={rates} />
+                <div>
+                  <Rates number={rates} />
+                  <h4 style={{ textAlign: "end" }}>
+                    Rated By : {reviews.length} persons
+                  </h4>
+                </div>
               </div>
               <Item title="Book Title"> {book.titre} </Item>
               <Divider />

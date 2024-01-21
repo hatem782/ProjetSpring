@@ -25,6 +25,7 @@ const genre = [
   "Religion",
   "Sport",
   "Cuisine",
+  "Finance",
   "Autre",
 ];
 const langue = [

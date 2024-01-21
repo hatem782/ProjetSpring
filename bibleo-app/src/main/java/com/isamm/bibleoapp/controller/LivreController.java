@@ -41,7 +41,19 @@ public class LivreController {
         PageRequest pr = PageRequest.of(page, size);
         Page<Livre> livres = livreDao.findAll(pr);
         return livres;
+    }
 
+    @GetMapping("/all-for-library")
+    public Page<Livre> getAllLivresForLibrary(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "9") int size,
+            @RequestParam(defaultValue = "All") String genre,
+            @RequestParam(defaultValue = "-1") Long auteur,
+            @RequestParam(defaultValue = "All") String titre) {
+        // i will return all the livres
+        PageRequest pr = PageRequest.of(page, size);
+        Page<Livre> livres = livreDao.findLivresByTitreAndAuteurAndGenre(titre,auteur,genre,pr);
+        return livres;
     }
 
     @GetMapping("/all-all")

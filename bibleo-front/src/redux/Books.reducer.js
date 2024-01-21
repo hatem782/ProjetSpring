@@ -56,6 +56,35 @@ export const GetAllBook = (page = 0) => {
   };
 };
 
+export const GetAllBookWithFilter = ({
+  page = 0,
+  titre = "all",
+  auteur = "-1",
+  genre = "all",
+}) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `/api/book/all-for-library?page=${page}&titre=${titre}&auteur=${auteur}&genre=${genre}`
+      );
+      console.log(response.data);
+      dispatch({
+        type: keys.SET_PAGINATION,
+        value: response.data,
+      });
+      dispatch({
+        type: keys.SET_BOOKS,
+        value: response.data.content,
+      });
+    } catch (error) {
+      dispatch({
+        type: keys.SET_PAYLOAD,
+        value: false,
+      });
+    }
+  };
+};
+
 export const GetAllAllBook = () => {
   return async (dispatch) => {
     try {

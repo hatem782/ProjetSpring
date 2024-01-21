@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.isamm.bibleoapp.Entity.Commentaire;
 import com.isamm.bibleoapp.service.CommentaireService;
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
 
 @RestController
 @RequestMapping("/api/commentaire")
@@ -54,7 +53,6 @@ public class CommentaireController {
 
     // update
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasAuthority('USER')")
     public Commentaire updateCommentaire(@PathVariable("id") Long id, @RequestBody Commentaire commentaire) {
         return commentaireService.updateCommentaire(commentaire, id);
     }
@@ -70,8 +68,9 @@ public class CommentaireController {
     // commentaire est signe
     @PutMapping("/signal/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<java.lang.String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
-        ResponseEntity<java.lang.String> response = commentaireService.signalCommentaire(id, raisonSign);
+    public ResponseEntity<String> signalCommentaire(@PathVariable Long id, @RequestBody String raisonSign) {
+        System.out.println(raisonSign);
+        ResponseEntity<String> response = commentaireService.signalCommentaire(id,raisonSign);
 
         // You can add additional logic here if needed
 

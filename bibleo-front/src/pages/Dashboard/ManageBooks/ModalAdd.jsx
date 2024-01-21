@@ -6,7 +6,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { CreateAuther, GetAllAuther } from "../../../redux/Auther.reducer";
+import {
+  CreateAuther,
+  GetAllAllAuther,
+  GetAllAuther,
+} from "../../../redux/Auther.reducer";
 import { CreateBook } from "../../../redux/Books.reducer";
 import ImageUp from "../../../components/Buttons/ImageUp";
 
@@ -24,6 +28,7 @@ const genre = [
   "Religion",
   "Sport",
   "Cuisine",
+  "Finance",
   "Autre",
 ];
 const langue = [
@@ -40,10 +45,10 @@ const langue = [
 function ModalAdd({ popup, handleClose }) {
   const { open } = popup;
   const dispatch = useDispatch();
-  const authers = useSelector((state) => state.AutherReducers.authers);
+  const authers = useSelector((state) => state.AutherReducers.all_authers);
 
   useEffect(() => {
-    dispatch(GetAllAuther());
+    dispatch(GetAllAllAuther());
   }, []);
 
   const [Form, setForm] = useState({
